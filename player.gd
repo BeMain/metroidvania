@@ -14,7 +14,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -JUMP_SPEED
 	if Input.is_action_just_pressed("ui_accept"):
-		SoundRipples.add_ripple(position / get_viewport_rect().size)
+		SoundRipples.add_ripple(position)
 	
 	var direction = Input.get_axis("left", "right")
 	velocity.x = direction * WALK_SPEED

@@ -6,8 +6,8 @@
 shader = ExtResource("1_vjk5y")
 shader_parameter/force = 0.035
 shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/size = 0.0
-shader_parameter/thickness = 0.079
+shader_parameter/size = 0.2
+shader_parameter/thickness = 0.01
 
 [sub_resource type="Animation" id="Animation_ynl86"]
 resource_name = "Pulse"

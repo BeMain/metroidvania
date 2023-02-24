@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b24l6w78sdmy5"]
+[gd_scene load_steps=3 format=3 uid="uid://b24l6w78sdmy5"]
 
 [ext_resource type="Shader" path="res://sound_ripple.gdshader" id="1_gsap5"]
 
@@ -8,39 +8,6 @@ shader_parameter/force = 0.035
 shader_parameter/center = Vector2(0.5, 0.5)
 shader_parameter/size = 0.0
 shader_parameter/thickness = 0.01
-
-[sub_resource type="Animation" id="Animation_ynl86"]
-resource_name = "Pulse"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5i2lo"]
-_data = {
-"Pulse": SubResource("Animation_ynl86")
-}
 
 [node name="SoundRipple" type="ColorRect"]
 material = SubResource("ShaderMaterial_1r03o")
@@ -53,8 +20,3 @@ metadata/_edit_lock_ = true
 
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_5i2lo")
-}

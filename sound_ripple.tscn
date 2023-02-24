@@ -1,12 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8vyos5obxrfn"]
+[gd_scene load_steps=5 format=3 uid="uid://b24l6w78sdmy5"]
 
-[ext_resource type="Shader" path="res://ripple.gdshader" id="1_vjk5y"]
+[ext_resource type="Shader" path="res://sound_ripple.gdshader" id="1_gsap5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1r03o"]
-shader = ExtResource("1_vjk5y")
+shader = ExtResource("1_gsap5")
 shader_parameter/force = 0.035
 shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/size = 0.2
+shader_parameter/size = 0.0
 shader_parameter/thickness = 0.01
 
 [sub_resource type="Animation" id="Animation_ynl86"]

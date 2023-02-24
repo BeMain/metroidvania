@@ -18,6 +18,6 @@ void fragment() {
 	float outer_mask = 1.0 - smoothstep(size-0.1, size, length(scaled_uv - scaled_center));
 	float inner_mask = smoothstep(size-thickness-0.1, size-thickness, length(scaled_uv - scaled_center));
 	float mask = outer_mask * inner_mask; 
-	vec2 displacement = normalize(scaled_uv - center) * force * mask;
+	vec2 displacement = normalize(scaled_uv - scaled_center) * force * mask;
 	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - displacement);
 }

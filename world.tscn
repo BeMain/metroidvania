@@ -37,7 +37,7 @@ texture = ExtResource("2_fjsoq")
 position = Vector2(343, 268)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(412, 519)
+position = Vector2(383, 522)
 rotation = 0.174533
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -46,6 +46,20 @@ shape = SubResource("RectangleShape2D_2t33r")
 metadata/_edit_lock_ = true
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(3.46875, 0.25)
+texture = ExtResource("2_fjsoq")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(798, 519)
+rotation = -0.174533
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_2t33r")
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D2"]
 scale = Vector2(3.46875, 0.25)
 texture = ExtResource("2_fjsoq")
 metadata/_edit_lock_ = true

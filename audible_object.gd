@@ -1,20 +1,20 @@
 extends RigidBody2D
 
-var new_collisions: Array[Node2D] = []
+## The change in velocity during the collision is multiplied by this to determine the force of the sound ripple generated.
+@export var velocity_to_force_ratio: float = 1e-5
 
-func _process(delta):
-	print(linear_velocity.length())
+## The minimum force required for a collision to generate a sound ripple
+@export var generate_ripple_threshold: float = 1e-4
+
+## The linear_velocity during the previous frame.
+var prev_frame_linear_velocity: Vector2 = Vector2.ZERO
 
 func _integrate_forces(state):
-	for collider in new_collisions:
-		for i in range(state.get_contact_count()):
-			if state.get_contact_collider_id(i) == collider.get_instance_id():
-				new_collisions.erase(collider)
-				var collider_velocity = collider.velocity if "velocity" in collider else Vector2.ZERO
-				var force: Vector2 = linear_velocity - collider_velocity
-				print(linear_velocity.length())
-				SoundRipples.add_ripple(state.get_contact_collider_position(i))
-
-func _on_body_entered(body):
-	new_collisions.append(body)
-
+	# Generate sound ripples on collisions
+	for i in range(state.get_contact_count()):
+		var force: float = (prev_frame_linear_velocity.length() - linear_velocity.length()) * velocity_to_force_ratio
+		if force > generate_ripple_threshold:
+			SoundRipples.add_ripple(state.get_contact_collider_position(i), 1.0, 512.0, force) 
+	
+	# Store velocity for next frame
+	prev_frame_linear_velocity = linear_velocity

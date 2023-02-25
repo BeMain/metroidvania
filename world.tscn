@@ -1,16 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqwkoh2y0qgbs"]
+[gd_scene load_steps=5 format=3 uid="uid://cqwkoh2y0qgbs"]
 
 [ext_resource type="PackedScene" uid="uid://kvh7jejnf37l" path="res://player.tscn" id="1_5qsqh"]
 [ext_resource type="Texture2D" uid="uid://cy32ov5kfeixm" path="res://icon.svg" id="2_fjsoq"]
-[ext_resource type="Shader" path="res://sound_ripple.gdshader" id="3_eosy1"]
 [ext_resource type="PackedScene" uid="uid://b13d5rg7dvdnx" path="res://rock.tscn" id="4_716qr"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_64hqa"]
-shader = ExtResource("3_eosy1")
-shader_parameter/force = 0.1
-shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/size = 0.5
-shader_parameter/thickness = 0.01
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t33r"]
 size = Vector2(442, 33)
@@ -18,15 +10,6 @@ size = Vector2(442, 33)
 [node name="World" type="Node2D"]
 
 [node name="SoundRippleCanvas" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="SoundRippleCanvas"]
-visible = false
-material = SubResource("ShaderMaterial_64hqa")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(579, 274)

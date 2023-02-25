@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://b24l6w78sdmy5"]
 
-[ext_resource type="Shader" path="res://sound_ripple.gdshader" id="1_gsap5"]
+[ext_resource type="Shader" path="res://sound_ripples/sound_ripple.gdshader" id="1_n3kab"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1r03o"]
-shader = ExtResource("1_gsap5")
+shader = ExtResource("1_n3kab")
 shader_parameter/force = 0.035
 shader_parameter/center = Vector2(0.5, 0.5)
 shader_parameter/size = 0.0

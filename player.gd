@@ -22,10 +22,22 @@ func get_input():
 	velocity.x = direction * WALK_SPEED
 
 
+
 func _physics_process(delta):
 	# Apply gravity
 	velocity.y += delta * gravity
 	
 	get_input()
 	
+	var velocity_before_move = velocity
+	
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider is RigidBody2D:
+			var normal = collision.get_normal()
+			var impulse =  collider.mass * (velocity_before_move - collider.linear_velocity).dot(normal) * normal
+			#print(impulse, velocity)
+			collider.apply_impulse(impulse, collision.get_position() - collider.position)

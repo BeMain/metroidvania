@@ -5,47 +5,68 @@
 [ext_resource type="PackedScene" uid="uid://b13d5rg7dvdnx" path="res://rock.tscn" id="4_716qr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t33r"]
-size = Vector2(442, 33)
+size = Vector2(64, 64)
 
 [node name="World" type="Node2D"]
 
 [node name="SoundRippleCanvas" type="CanvasLayer" parent="."]
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(579, 274)
-scale = Vector2(10, 10)
-texture = ExtResource("2_fjsoq")
-
 [node name="Player" parent="." instance=ExtResource("1_5qsqh")]
 position = Vector2(343, 268)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(383, 522)
-rotation = 0.174533
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_2t33r")
-metadata/_edit_lock_ = true
+position = Vector2(-5, 312)
+scale = Vector2(1, 15)
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(3.46875, 0.25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_fjsoq")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_2t33r")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(798, 519)
-rotation = -0.174533
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(0, -0.5)
-shape = SubResource("RectangleShape2D_2t33r")
-metadata/_edit_lock_ = true
+position = Vector2(587, 5)
+rotation = 1.5708
+scale = Vector2(1, 20)
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D2"]
-scale = Vector2(3.46875, 0.25)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_fjsoq")
 metadata/_edit_lock_ = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("RectangleShape2D_2t33r")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(591, 659)
+rotation = 1.5708
+scale = Vector2(1, 20)
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D4"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_fjsoq")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+shape = SubResource("RectangleShape2D_2t33r")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(1170, 388)
+scale = Vector2(1, 15)
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D3"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_fjsoq")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+shape = SubResource("RectangleShape2D_2t33r")
+metadata/_edit_lock_ = true
+
 [node name="Rock" parent="." instance=ExtResource("4_716qr")]
-position = Vector2(327, 57)
+position = Vector2(481, 348)

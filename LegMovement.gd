@@ -22,8 +22,8 @@ func _ready():
 
 func _process(delta):
 	# Get physics data
-	var vel = get_node("../..").velocity
-	var grounded = get_node("../..").is_on_floor()
+	var vel = get_node("..").vel
+	var grounded = get_node("../../Character").is_on_floor()
 	
 	if (abs(vel.x) >= 0.1 and grounded):
 		if (timer.is_stopped()):

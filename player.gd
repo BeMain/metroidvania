@@ -37,7 +37,5 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		if collider is RigidBody2D:
-			var normal = collision.get_normal()
-			var impulse =  collider.mass * (velocity_before_move - collider.linear_velocity).dot(normal) * normal
-			#print(impulse, velocity)
-			collider.apply_impulse(impulse, collision.get_position() - collider.position)
+			var impulse =  (velocity_before_move - collider.linear_velocity).project(collision.get_normal())
+			collider.apply_central_impulse(impulse)

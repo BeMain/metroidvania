@@ -42,6 +42,7 @@ func get_input():
 	if is_on_floor() == true and is_on_floor_prev == false:
 		hit_ground()
 
+
 func _physics_process(delta):
 	# Apply gravity
 	velocity.y += delta * gravity

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1o5k7bed33k8"
-path="res://.godot/imported/Jerboa_ear.png-b1faa63de91e47409a9388d9a4ad321d.ctex"
+path="res://.godot/imported/Jerboa_ear.png-6b0cae28de5b8565759077e74df7376a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Jerboa_ear.png"
-dest_files=["res://.godot/imported/Jerboa_ear.png-b1faa63de91e47409a9388d9a4ad321d.ctex"]
+source_file="res://Textures/Jerboa_ear.png"
+dest_files=["res://.godot/imported/Jerboa_ear.png-6b0cae28de5b8565759077e74df7376a.ctex"]
 
 [params]
 

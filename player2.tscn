@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://2b4304wl21mk"]
+[gd_scene load_steps=9 format=3 uid="uid://d1bidsr7ybk7f"]
 
-[ext_resource type="Texture2D" uid="uid://bpmweobtca8r" path="res://textures/Jerboa_body.png" id="1_t3dgj"]
+[ext_resource type="Texture2D" uid="uid://bpmweobtca8r" path="res://Textures/Jerboa_body.png" id="1_t3dgj"]
 [ext_resource type="Script" path="res://playerAnim.gd" id="2_ykudx"]
-[ext_resource type="Texture2D" uid="uid://d1o5k7bed33k8" path="res://textures/Jerboa_ear.png" id="3_gpbub"]
-[ext_resource type="Texture2D" uid="uid://p8na88f4pgim" path="res://textures/Jerboa_eye.png" id="4_5arcf"]
+[ext_resource type="Texture2D" uid="uid://d1o5k7bed33k8" path="res://Textures/Jerboa_ear.png" id="3_gpbub"]
+[ext_resource type="Texture2D" uid="uid://p8na88f4pgim" path="res://Textures/Jerboa_eye.png" id="4_5arcf"]
 [ext_resource type="Script" path="res://LegMovement.gd" id="5_y54on"]
 [ext_resource type="Texture2D" uid="uid://cy32ov5kfeixm" path="res://icon.svg" id="6_y6htd"]
 [ext_resource type="Script" path="res://player.gd" id="7_pmrh8"]

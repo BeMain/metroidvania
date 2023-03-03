@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqwkoh2y0qgbs"]
+[gd_scene load_steps=5 format=3 uid="uid://cqwkoh2y0qgbs"]
 
-[ext_resource type="PackedScene" uid="uid://d1bidsr7ybk7f" path="res://player2.tscn" id="2_835hi"]
+[ext_resource type="PackedScene" uid="uid://kvh7jejnf37l" path="res://player.tscn" id="2_f4qc2"]
 [ext_resource type="Texture2D" uid="uid://cy32ov5kfeixm" path="res://icon.svg" id="2_fjsoq"]
+[ext_resource type="PackedScene" uid="uid://b13d5rg7dvdnx" path="res://rock.tscn" id="3_4ye5s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t33r"]
 size = Vector2(64, 64)
@@ -9,9 +10,6 @@ size = Vector2(64, 64)
 [node name="World" type="Node2D"]
 
 [node name="SoundRippleCanvas" type="CanvasLayer" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("2_835hi")]
-position = Vector2(544, 249)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(383, 522)
@@ -25,7 +23,6 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -0.500244)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2t33r")
 metadata/_edit_lock_ = true
 
@@ -41,6 +38,11 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(0, -0.500061)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2t33r")
 metadata/_edit_lock_ = true
+
+[node name="Player" parent="." instance=ExtResource("2_f4qc2")]
+position = Vector2(586, 277)
+
+[node name="Rock" parent="." instance=ExtResource("3_4ye5s")]
+position = Vector2(273, 253)

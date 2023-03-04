@@ -17,3 +17,8 @@ texture = ExtResource("7_0ckna")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vlxh7")
+
+[node name="RippleTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true

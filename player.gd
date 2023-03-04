@@ -24,13 +24,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _physics_process(delta):
+	var velocity_before_move = velocity
+	
 	# Apply gravity
-	if not is_on_floor():
-		velocity.y += delta * gravity
+	velocity.y += delta * gravity
 	
 	get_input()
-	
-	var velocity_before_move = velocity
 	
 	move_and_slide()
 	

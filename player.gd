@@ -1,62 +1,75 @@
 extends CharacterBody2D
 
 @export_category("Movement")
-@export var WALK_SPEED: int = 250
-@export var JUMP_SPEED: int = 500
-@export var WALK_ANGLE: int = 45
-var timer = Timer.new()
-var is_on_floor_prev
-var jump_ready
+@export var acceleration: int = 50
+@export var walk_speed: int = 250
+@export var sneak_mod: float = 0.6
+@export var run_mod: float = 1.5
+
+@export var jump_speed: int = 500
+
+@export_category("Ripples")
+## The change in velocity during the collision is multiplied by this to determine the force of the sound ripple generated.
+@export_range(0, 1e-4, 1e-6) var collision_velocity_to_force_ratio: float = 1e-5
+
+@export_range(0, 1e-5, 1e-7) var walking_velocity_to_force_ratio: float = 5e-7
+
+## The minimum force required for a collision to generate a sound ripple
+@export_range(0, 1e-3, 1e-5) var generate_ripple_threshold: float = 1e-4
+
+@export var ripple_timer_path: NodePath = ^"RippleTimer"
+@onready var ripple_timer: Timer = get_node(ripple_timer_path)
+
 
 # Get the gravity from the project settings so you can sync with rigid body nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _ready():
-	timer.connect("timeout", timeout)
-	add_child(timer)
-	timer.set_one_shot(true)
 
-	jump_ready = true
-	is_on_floor_prev = false
+func _physics_process(delta):
+	var velocity_before_move = velocity
+	
+	# Apply gravity
+	velocity.y += delta * gravity
+	
+	get_input()
+	
+	move_and_slide()
+	
+	generate_ripples_on_collision(velocity_before_move)
+
 
 func get_input():
 	# Handle jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = -JUMP_SPEED
+		velocity.y = -jump_speed
 	
 	# DEBUG: Ripples
 	if Input.is_action_just_pressed("ui_accept"):
 		SoundRipples.add_ripple(position)
 	
 	# Handle left/right movement
-	#var direction = Input.get_axis("left", "right")
-	#velocity.x = direction * WALK_SPEED
+	var direction = Input.get_axis("left", "right")
+	var target_speed = direction * walk_speed
 	
+	if Input.is_action_pressed("run"):
+		target_speed *= run_mod
 	
-	var input = Input.get_axis("left", "right")
-	if is_on_floor() and jump_ready and input != 0:
-		var dir = input / abs(input)
-		velocity = Vector2(WALK_SPEED * input, 0).rotated(-dir * deg_to_rad(WALK_ANGLE))
-		jump_ready = false
-
-	if is_on_floor() == true and is_on_floor_prev == false:
-		hit_ground()
-
-
-func _physics_process(delta):
-	# Apply gravity
-	velocity.y += delta * gravity
+	if Input.is_action_pressed("sneak"):
+		target_speed *= sneak_mod
 	
-	get_input()
+	velocity.x = velocity.move_toward(Vector2(target_speed, 0), acceleration).x
+
+## Generate sound ripples on collisions
+func generate_ripples_on_collision(velocity_before_move: Vector2):
+	if ripple_timer.time_left != 0:
+		return
 	
-	is_on_floor_prev = is_on_floor()
-
-	move_and_slide()
-
-func timeout():
-	velocity.x = 0
-	jump_ready = true
-	
-
-func hit_ground():
-	timer.start(0.15)
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		
+		var impact_force = abs((velocity_before_move - velocity).project(collision.get_normal()).length()) * collision_velocity_to_force_ratio
+		var movement_force = velocity.length() * walking_velocity_to_force_ratio
+		var force = max(impact_force, movement_force)
+		if force > generate_ripple_threshold:
+			SoundRipples.add_ripple(collision.get_position(), 1.0, 512.0, force) 
+			ripple_timer.start()

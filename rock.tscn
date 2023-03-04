@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://b4kors6856u0k" path="res://audible_object.tscn" id="2_n4shq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qqibj"]
-radius = 32.0
+radius = 16.0
 
 [node name="Rock" instance=ExtResource("2_n4shq")]
 script = ExtResource("2_jxvyu")
 
 [node name="Icon" type="Sprite2D" parent="." index="1"]
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_ldnbu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]

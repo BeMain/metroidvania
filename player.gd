@@ -67,7 +67,7 @@ func generate_ripples_on_collision(velocity_before_move: Vector2):
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		
-		var impact_force = abs((velocity_before_move - velocity).length()) * collision_velocity_to_force_ratio
+		var impact_force = abs((velocity_before_move - velocity).project(collision.get_normal()).length()) * collision_velocity_to_force_ratio
 		var movement_force = velocity.length() * walking_velocity_to_force_ratio
 		var force = max(impact_force, movement_force)
 		if force > generate_ripple_threshold:

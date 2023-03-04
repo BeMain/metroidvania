@@ -17,8 +17,8 @@ var prev_frame_linear_velocity: Vector2 = Vector2.ZERO
 func _integrate_forces(state):
 	# Generate sound ripples on collisions
 	for i in state.get_contact_count():
-		var force: float = (prev_frame_linear_velocity.length() - linear_velocity.length()) * velocity_to_force_ratio
-		if abs(force) > generate_ripple_threshold and ripple_timer.time_left == 0:
+		var force: float = abs((prev_frame_linear_velocity - linear_velocity).length()) * velocity_to_force_ratio
+		if force > generate_ripple_threshold and ripple_timer.time_left == 0:
 			SoundRipples.add_ripple(state.get_contact_collider_position(i), 1.0, 512.0, force) 
 			ripple_timer.start()
 	

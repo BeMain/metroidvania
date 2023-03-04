@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p8na88f4pgim"
-path="res://.godot/imported/Jerboa_eye.png-3af9e5fffb214626d6010c9ab3eb6e8d.ctex"
+uid="uid://b61d4et3xr2jv"
+path="res://.godot/imported/White_Circle.svg-f260522ce76b8c5adb0e8127c9a1515e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Jerboa_eye.png"
-dest_files=["res://.godot/imported/Jerboa_eye.png-3af9e5fffb214626d6010c9ab3eb6e8d.ctex"]
+source_file="res://textures/White_Circle.svg"
+dest_files=["res://.godot/imported/White_Circle.svg-f260522ce76b8c5adb0e8127c9a1515e.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

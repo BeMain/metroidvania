@@ -1,22 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqwkoh2y0qgbs"]
+[gd_scene load_steps=6 format=3 uid="uid://cqwkoh2y0qgbs"]
 
-[ext_resource type="PackedScene" uid="uid://d1bidsr7ybk7f" path="res://player2.tscn" id="2_835hi"]
+[ext_resource type="PackedScene" uid="uid://2b4304wl21mk" path="res://player2.tscn" id="2_835hi"]
 [ext_resource type="Texture2D" uid="uid://cy32ov5kfeixm" path="res://icon.svg" id="2_fjsoq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_517vj"]
+friction = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t33r"]
 size = Vector2(64, 64)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nc0ts"]
+friction = 0.0
 
 [node name="World" type="Node2D"]
 
 [node name="SoundRippleCanvas" type="CanvasLayer" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("2_835hi")]
-position = Vector2(544, 249)
+position = Vector2(559, 219)
+scale = Vector2(0.4, 0.4)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(383, 522)
-rotation = 0.174533
-scale = Vector2(8, 0.4)
+position = Vector2(633, 535)
+scale = Vector2(27.96, 0.4)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_517vj")
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D"]
 scale = Vector2(0.5, 0.5)
@@ -25,14 +33,31 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -0.500244)
-scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_2t33r")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(534, 405)
+rotation = -0.47822
+scale = Vector2(3, 0.5)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_nc0ts")
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D3"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_fjsoq")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(0, -0.500061)
 shape = SubResource("RectangleShape2D_2t33r")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(798, 519)
-rotation = -0.174533
-scale = Vector2(8, 0.5)
+position = Vector2(200, 450)
+scale = Vector2(8, 0.4)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_nc0ts")
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D2"]
 scale = Vector2(0.5, 0.5)
@@ -41,6 +66,5 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(0, -0.500061)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_2t33r")
 metadata/_edit_lock_ = true

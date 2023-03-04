@@ -11,6 +11,11 @@ size = Vector2(64, 64)
 
 [node name="SoundRippleCanvas" type="CanvasLayer" parent="."]
 
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(574, 328)
+scale = Vector2(10, 10)
+texture = ExtResource("2_fjsoq")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(383, 522)
 rotation = 0.174533
@@ -45,4 +50,4 @@ metadata/_edit_lock_ = true
 position = Vector2(586, 277)
 
 [node name="Rock" parent="." instance=ExtResource("3_4ye5s")]
-position = Vector2(273, 253)
+position = Vector2(289, 314)

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://kvh7jejnf37l" path="res://player.tscn" id="2_f4qc2"]
 [ext_resource type="Texture2D" uid="uid://cy32ov5kfeixm" path="res://icon.svg" id="2_fjsoq"]
-[ext_resource type="PackedScene" uid="uid://b13d5rg7dvdnx" path="res://rock.tscn" id="3_4ye5s"]
+[ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/rock.tscn" id="3_b32g3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2t33r"]
 size = Vector2(64, 64)
@@ -46,8 +46,8 @@ position = Vector2(0, -0.500061)
 shape = SubResource("RectangleShape2D_2t33r")
 metadata/_edit_lock_ = true
 
-[node name="Rock" parent="." instance=ExtResource("3_4ye5s")]
-position = Vector2(545, 88)
-
 [node name="Player" parent="." instance=ExtResource("2_f4qc2")]
 position = Vector2(634, 87)
+
+[node name="Rock" parent="." instance=ExtResource("3_b32g3")]
+position = Vector2(284, 141)

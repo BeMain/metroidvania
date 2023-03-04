@@ -32,8 +32,7 @@ shape = SubResource("RectangleShape2D_2t33r")
 metadata/_edit_lock_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(798, 519)
-rotation = -0.174533
+position = Vector2(847, 562)
 scale = Vector2(8, 0.5)
 
 [node name="Icon" type="Sprite2D" parent="StaticBody2D2"]

@@ -10,7 +10,9 @@ extends CharacterBody2D
 
 @export_category("Ripples")
 ## The change in velocity during the collision is multiplied by this to determine the force of the sound ripple generated.
-@export_range(0, 1e-4, 1e-6) var velocity_to_force_ratio: float = 1e-5
+@export_range(0, 1e-4, 1e-6) var collision_velocity_to_force_ratio: float = 1e-5
+
+@export_range(0, 1e-5, 1e-7) var walking_velocity_to_force_ratio: float = 5e-7
 
 ## The minimum force required for a collision to generate a sound ripple
 @export_range(0, 1e-3, 1e-5) var generate_ripple_threshold: float = 1e-4
@@ -59,9 +61,15 @@ func get_input():
 
 ## Generate sound ripples on collisions
 func generate_ripples_on_collision(velocity_before_move: Vector2):
+	if ripple_timer.time_left != 0:
+		return
+	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		var force = abs((velocity_before_move - velocity).length()) * velocity_to_force_ratio
-		if force > generate_ripple_threshold and ripple_timer.time_left == 0:
+		
+		var impact_force = abs((velocity_before_move - velocity).length()) * collision_velocity_to_force_ratio
+		var movement_force = velocity.length() * walking_velocity_to_force_ratio
+		var force = max(impact_force, movement_force)
+		if force > generate_ripple_threshold:
 			SoundRipples.add_ripple(collision.get_position(), 1.0, 512.0, force) 
 			ripple_timer.start()

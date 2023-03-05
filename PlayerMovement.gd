@@ -9,17 +9,18 @@ extends CharacterBody2D
 
 @export var jump_speed: int = 500
 
+
 @export_category("Ripples")
 ## The change in velocity during the collision is multiplied by this to determine the force of the sound ripple generated.
-@export_range(0, 1e-4, 1e-6) var collision_velocity_to_force_ratio: float = 1e-5
-
-@export_range(0, 1e-5, 1e-7) var walking_velocity_to_force_ratio: float = 5e-7
+@export_range(0, 1e-4, 1e-6) var impact_velocity_to_force_ratio: float = 1e-5  # On impact
+@export_range(0, 1e-5, 1e-7) var walking_velocity_to_force_ratio: float = 1e-6  # When walking
 
 ## The minimum force required for a collision to generate a sound ripple
 @export_range(0, 1e-3, 1e-5) var generate_ripple_threshold: float = 1e-4
 
 @export var ripple_timer_path: NodePath = ^"RippleTimer"
 @onready var ripple_timer: Timer = get_node(ripple_timer_path)
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -66,7 +67,7 @@ func generate_ripples_on_collision(velocity_before_move: Vector2):
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		
-		var impact_force = abs((velocity_before_move - velocity).project(collision.get_normal()).length()) * collision_velocity_to_force_ratio
+		var impact_force = abs((velocity_before_move - velocity).project(collision.get_normal()).length()) * impact_velocity_to_force_ratio
 		var movement_force = velocity.length() * walking_velocity_to_force_ratio
 		var force = max(impact_force, movement_force)
 		if force > generate_ripple_threshold:

@@ -40,6 +40,11 @@ begin_cap_mode = 2
 end_cap_mode = 2
 script = ExtResource("3_eyvmi")
 
+[node name="RippleTimer" type="Timer" parent="Body"]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
 [node name="Ear" type="CharacterBody2D" parent="."]
 visible = false
 position = Vector2(0, -120)

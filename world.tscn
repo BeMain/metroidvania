@@ -18,7 +18,7 @@ friction = 0.0
 [node name="SoundRippleCanvas" type="CanvasLayer" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("2_835hi")]
-position = Vector2(559, 219)
+position = Vector2(553, 219)
 scale = Vector2(0.4, 0.4)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

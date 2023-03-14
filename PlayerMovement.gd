@@ -26,13 +26,14 @@ extends CharacterBody2D
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
+
 func _physics_process(delta):
 	var velocity_before_move = velocity
 	
 	# Apply gravity
 	velocity.y += gravity * delta
 	get_input()
-
+	
 	move_and_slide()
 	
 	generate_ripples_on_collision(velocity_before_move)
@@ -60,16 +61,16 @@ func get_input():
 	velocity.x = move_toward(velocity.x, target_speed, acceleration)
 
 ## Generate sound ripples on collisions
-func generate_ripples_on_collision(velocity_before_move: Vector2):
-	if ripple_timer.time_left != 0:
-		return
-	
+func generate_ripples_on_collision(prev_frame_velocity: Vector2):
+	#print(get_slide_collision_count())
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
+		var normal = collision.get_normal()
 		
-		var impact_force = abs((velocity_before_move - velocity).project(collision.get_normal()).length()) * impact_velocity_to_force_ratio
+		var impact_force = (velocity - prev_frame_velocity).length() * impact_velocity_to_force_ratio
 		var movement_force = velocity.length() * walking_velocity_to_force_ratio
 		var force = max(impact_force, movement_force)
-		if force > generate_ripple_threshold:
+		if force > generate_ripple_threshold and ripple_timer.time_left == 0:
 			SoundRipples.add_ripple(collision.get_position(), 1.0, 512.0, force) 
 			ripple_timer.start()
+			return

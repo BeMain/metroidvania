@@ -1,74 +1,68 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1v7ib1rhlyml"]
+[gd_scene load_steps=10 format=3 uid="uid://bww2xlda4yq52"]
 
-[ext_resource type="PackedScene" uid="uid://2b4304wl21mk" path="res://player.tscn" id="2_835hi"]
-[ext_resource type="Texture2D" uid="uid://cy32ov5kfeixm" path="res://icon.svg" id="2_fjsoq"]
-[ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/rock.tscn" id="3_b32g3"]
+[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="4_1u77r"]
+[ext_resource type="Script" path="res://Ripples.gd" id="4_sm2rk"]
+[ext_resource type="Shader" path="res://ripple_canvas.gdshader" id="4_xicoq"]
+[ext_resource type="Shader" path="res://ripple_simulation.gdshader" id="5_6rx6j"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_517vj"]
-friction = 0.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_bcpiq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2t33r"]
-size = Vector2(64, 64)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slv3u"]
+shader = ExtResource("4_xicoq")
+shader_parameter/amplitude = null
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nc0ts"]
-friction = 0.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40tma"]
+shader = ExtResource("5_6rx6j")
+shader_parameter/a = null
+shader_parameter/amplitude = null
+shader_parameter/grid_points = null
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lrtsj"]
+viewport_path = NodePath("Ripples/SimulationViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uwrvm"]
+viewport_path = NodePath("Ripples/CollisionViewport")
 
 [node name="World" type="Node2D"]
 
-[node name="SoundRippleCanvas" type="CanvasLayer" parent="."]
-
-[node name="Player" parent="." instance=ExtResource("2_835hi")]
-position = Vector2(553, 219)
-scale = Vector2(0.4, 0.4)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(633, 535)
-scale = Vector2(27.96, 0.4)
-collision_mask = 0
-physics_material_override = SubResource("PhysicsMaterial_517vj")
+visibility_layer = 3
+position = Vector2(100, 100)
+scale = Vector2(10, 10)
 
-[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_fjsoq")
-metadata/_edit_lock_ = true
+[node name="WhiteCircle" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(0.033, 0.033)
+texture = ExtResource("4_1u77r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, -0.500244)
-shape = SubResource("RectangleShape2D_2t33r")
+shape = SubResource("CircleShape2D_bcpiq")
 metadata/_edit_lock_ = true
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(534, 405)
-rotation = -0.47822
-scale = Vector2(3, 0.5)
-collision_mask = 0
-physics_material_override = SubResource("PhysicsMaterial_nc0ts")
+[node name="Ripples" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_slv3u")
+script = ExtResource("4_sm2rk")
 
-[node name="Icon" type="Sprite2D" parent="StaticBody2D3"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_fjsoq")
-metadata/_edit_lock_ = true
+[node name="SimulationViewport" type="SubViewport" parent="Ripples"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(0, -0.500061)
-shape = SubResource("RectangleShape2D_2t33r")
-metadata/_edit_lock_ = true
+[node name="ColorRect" type="ColorRect" parent="Ripples/SimulationViewport"]
+material = SubResource("ShaderMaterial_40tma")
+offset_right = 512.0
+offset_bottom = 512.0
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(200, 450)
-scale = Vector2(8, 0.4)
-collision_mask = 0
-physics_material_override = SubResource("PhysicsMaterial_nc0ts")
+[node name="CollisionViewport" type="SubViewport" parent="Ripples"]
 
-[node name="Icon" type="Sprite2D" parent="StaticBody2D2"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_fjsoq")
-metadata/_edit_lock_ = true
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(0, -0.500061)
-shape = SubResource("RectangleShape2D_2t33r")
-metadata/_edit_lock_ = true
+[node name="SimulationVisualization" type="TextureRect" parent="UI"]
+offset_left = 17.0
+offset_top = 56.0
+offset_right = 529.0
+offset_bottom = 568.0
+texture = SubResource("ViewportTexture_lrtsj")
 
-[node name="Rock" parent="." instance=ExtResource("3_b32g3")]
-position = Vector2(305, 219)
+[node name="CollisionVisualization" type="TextureRect" parent="UI"]
+offset_left = 611.0
+offset_top = 56.0
+offset_right = 1123.0
+offset_bottom = 568.0
+texture = SubResource("ViewportTexture_uwrvm")

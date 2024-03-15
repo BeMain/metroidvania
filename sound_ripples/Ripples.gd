@@ -122,4 +122,6 @@ func update_height_map():
 
 func resize_window():
 	if is_inside_tree():
-		collision_viewport.size = DisplayServer.window_get_size()
+		var screen_size = DisplayServer.window_get_size()
+		size = screen_size
+		collision_viewport.size = screen_size

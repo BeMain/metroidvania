@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://2b4304wl21mk"]
 
-[ext_resource type="Script" path="res://PlayerMovement.gd" id="1_7blwr"]
-[ext_resource type="Texture2D" uid="uid://bpmweobtca8r" path="res://textures/Jerboa_body.png" id="2_nve6o"]
-[ext_resource type="Script" path="res://EarPoints.gd" id="3_pfq4w"]
-[ext_resource type="Script" path="res://EarMovement.gd" id="4_akp3n"]
-[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_afxnu"]
+[ext_resource type="Script" path="res://scripts/PlayerMovement.gd" id="1_rqr6g"]
+[ext_resource type="Texture2D" uid="uid://bpmweobtca8r" path="res://textures/Jerboa_body.png" id="2_g6m6k"]
+[ext_resource type="Script" path="res://scripts/EarPoints.gd" id="3_5taej"]
+[ext_resource type="Script" path="res://scripts/EarMovement.gd" id="4_w0lbp"]
+[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_kjsh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jtjyp"]
 size = Vector2(130, 130)
@@ -21,7 +21,7 @@ radius = 36.0
 
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 2
-script = ExtResource("1_7blwr")
+script = ExtResource("1_rqr6g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 shape = SubResource("RectangleShape2D_jtjyp")
@@ -29,7 +29,7 @@ shape = SubResource("RectangleShape2D_jtjyp")
 [node name="Body" type="Sprite2D" parent="Body"]
 position = Vector2(6, -2)
 scale = Vector2(0.9, 0.9)
-texture = ExtResource("2_nve6o")
+texture = ExtResource("2_g6m6k")
 
 [node name="EarLine" type="Line2D" parent="Body"]
 position = Vector2(0, -65)
@@ -38,7 +38,7 @@ width_curve = SubResource("Curve_o1xva")
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
-script = ExtResource("3_pfq4w")
+script = ExtResource("3_5taej")
 
 [node name="RippleTimer" type="Timer" parent="Body"]
 wait_time = 0.2
@@ -49,7 +49,7 @@ autostart = true
 visible = false
 position = Vector2(0, -120)
 collision_layer = 2
-script = ExtResource("4_akp3n")
+script = ExtResource("4_w0lbp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ear"]
 shape = SubResource("CircleShape2D_bkcms")
@@ -57,4 +57,4 @@ shape = SubResource("CircleShape2D_bkcms")
 [node name="Debug" type="Sprite2D" parent="Ear"]
 modulate = Color(0.313726, 0.227451, 1, 1)
 scale = Vector2(0.12, 0.12)
-texture = ExtResource("5_afxnu")
+texture = ExtResource("5_kjsh4")

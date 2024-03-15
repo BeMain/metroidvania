@@ -5,7 +5,7 @@ extends Node
 @onready var ripple_canvas: ColorRect = get_node(ripple_canvas_path)
 
 ## The template used to generate ripples
-var ripple_generator = preload("res://sound_ripples/RippleGenerator.tscn")
+var ripple_generator = preload("res://objects/RippleGenerator.tscn")
 
 
 ## Create a ripple at the specified position

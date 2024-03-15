@@ -17,6 +17,7 @@ extends ColorRect
 @onready var collision_viewport: SubViewport = $CollisionViewport
 ## Material that contains the simulation shader
 @onready var simulation_material: ShaderMaterial = simulation_viewport.get_node("ColorRect").material
+## Material of the surface, where ripples are displayed
 @onready var surface_material: ShaderMaterial = material
 
 # Current height map of the surface as raw byte array

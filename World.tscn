@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
 [ext_resource type="Script" path="res://Debug_Player.gd" id="3_8kg1l"]
 [ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_d2sjn"]
-[ext_resource type="Shader" path="res://sound_ripples/ripple_canvas.gdshader" id="6_bmjpl"]
-[ext_resource type="Script" path="res://sound_ripples/RippleCanvas.gd" id="7_tc7sj"]
-[ext_resource type="Shader" path="res://sound_ripples/ripple_simulation.gdshader" id="8_1qfcl"]
+[ext_resource type="Shader" path="res://shaders/ripple_canvas.gdshader" id="6_bmjpl"]
+[ext_resource type="Script" path="res://scripts/RippleCanvas.gd" id="7_tc7sj"]
+[ext_resource type="Shader" path="res://shaders/ripple_simulation.gdshader" id="8_1qfcl"]
 [ext_resource type="Script" path="res://Debug_FPS.gd" id="10_rb2tv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnl5o"]

@@ -77,6 +77,8 @@ grow_vertical = 2
 script = ExtResource("7_tc7sj")
 grid_points = Vector2i(240, 135)
 wave_speed = 0.2
+initial_amplitude = 1.0
+mesh_amplitude = 0.1
 
 [node name="SimulationViewport" type="SubViewport" parent="Ripples"]
 disable_3d = true

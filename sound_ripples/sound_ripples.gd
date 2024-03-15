@@ -1,6 +1,6 @@
 extends Node2D
 
-const sound_ripple_canvas_path: NodePath = ^"/root/World/SoundRippleCanvas"
+const sound_ripple_canvas_path: NodePath = ^"/root/SoundRippleCanvas"
 const SoundRipple: Resource = preload("res://sound_ripples/sound_ripple.tscn")
 
 @onready var sound_ripple_canvas = get_node(sound_ripple_canvas_path)

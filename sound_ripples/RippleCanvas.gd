@@ -6,7 +6,8 @@ extends ColorRect
 @export var wave_speed = 0.065
 ## Amplitude of newly created waves in the simulation
 @export var initial_amplitude = 0.5
-@export var mesh_amplitude = 1.0 # amplitude of waves in the mesh shader
+## Amplitude of the waves displayed on the canvas
+@export var mesh_amplitude = 1.0
 ## Texture for the land mass
 @export var land_texture : Texture = ImageTexture.create_from_image(Image.create(1, 1, false, Image.FORMAT_RGB8))
 
@@ -17,10 +18,6 @@ extends ColorRect
 ## Material that contains the simulation shader
 @onready var simulation_material: ShaderMaterial = simulation_viewport.get_node("ColorRect").material
 @onready var surface_material: ShaderMaterial = material
-
-
-# Size of the water body in both dimensions
-var water_size = 50.0
 
 # Current height map of the surface as raw byte array
 var surface_data = PackedByteArray()

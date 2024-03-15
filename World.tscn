@@ -1,17 +1,20 @@
-[gd_scene load_steps=15 format=3 uid="uid://bww2xlda4yq52"]
+[gd_scene load_steps=17 format=3 uid="uid://bww2xlda4yq52"]
 
 [ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
 [ext_resource type="Texture2D" uid="uid://n6u4nfreinpj" path="res://textures/grid.png" id="2_yd4d7"]
-[ext_resource type="Script" path="res://DebugPlayer.gd" id="3_8kg1l"]
-[ext_resource type="Shader" path="res://sound_ripples/collision.gdshader" id="4_t2lfi"]
+[ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
+[ext_resource type="Script" path="res://Debug_Player.gd" id="3_8kg1l"]
 [ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_d2sjn"]
-[ext_resource type="Shader" path="res://sound_ripples/ripples.gdshader" id="6_bmjpl"]
-[ext_resource type="Script" path="res://sound_ripples/Ripples.gd" id="7_tc7sj"]
-[ext_resource type="Shader" path="res://sound_ripples/simulation.gdshader" id="8_1qfcl"]
+[ext_resource type="Shader" path="res://sound_ripples/ripple_canvas.gdshader" id="6_bmjpl"]
+[ext_resource type="Script" path="res://sound_ripples/RippleCanvas.gd" id="7_tc7sj"]
+[ext_resource type="Shader" path="res://sound_ripples/ripple_simulation.gdshader" id="8_1qfcl"]
+[ext_resource type="Script" path="res://Debug_FPS.gd" id="10_rb2tv"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nxubg"]
-shader = ExtResource("4_t2lfi")
-shader_parameter/speed = null
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnl5o"]
+size = Vector2(300, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mrw4g"]
+size = Vector3(300, 50, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcpiq"]
 radius = 15.0
@@ -40,22 +43,32 @@ position = Vector2(960, 540)
 texture = ExtResource("1_sce1a")
 
 [node name="Grid" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.215686, 0.192157, 1, 1)
 position = Vector2(481, 304)
 scale = Vector2(3, 3)
 texture = ExtResource("2_yd4d7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(456, 481)
+rotation = 0.154966
+scale = Vector2(5, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_mnl5o")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+mesh = SubResource("BoxMesh_mrw4g")
+
+[node name="Rock" parent="." instance=ExtResource("3_00he0")]
+position = Vector2(401, 236)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 visibility_layer = 3
 position = Vector2(600, 300)
 script = ExtResource("3_8kg1l")
 metadata/_edit_group_ = true
-
-[node name="CollisionMesh" type="Sprite2D" parent="Player"]
-visibility_layer = 2
-material = SubResource("ShaderMaterial_nxubg")
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("5_d2sjn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 scale = Vector2(0.05, 0.05)
@@ -67,18 +80,13 @@ metadata/_edit_lock_ = true
 
 [node name="Ripples" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_slv3u")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_right = 1920.0
 offset_bottom = 1080.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("7_tc7sj")
 grid_points = Vector2i(240, 135)
 wave_speed = 0.2
-initial_amplitude = 1.0
 mesh_amplitude = 0.1
+metadata/_edit_lock_ = true
 
 [node name="SimulationViewport" type="SubViewport" parent="Ripples"]
 disable_3d = true
@@ -118,3 +126,8 @@ offset_bottom = 698.0
 grow_vertical = 0
 scale = Vector2(0.25, 0.25)
 texture = SubResource("ViewportTexture_uwrvm")
+
+[node name="FPS" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("10_rb2tv")

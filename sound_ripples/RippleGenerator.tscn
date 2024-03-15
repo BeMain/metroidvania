@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d352kk6kaie2k"]
+
+[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="1_r2jg2"]
+
+[node name="RippleGenerator" type="Sprite2D"]
+visibility_layer = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_r2jg2")

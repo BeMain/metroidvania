@@ -44,10 +44,6 @@ func get_input():
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = -jump_speed
 	
-	# DEBUG: Ripples
-	if Input.is_action_just_pressed("ui_accept"):
-		SoundRipples.add_ripple(position)
-	
 	# Handle left/right movement
 	var direction = Input.get_axis("left", "right")
 	var target_speed = direction * walk_speed
@@ -71,6 +67,6 @@ func generate_ripples_on_collision(prev_frame_velocity: Vector2):
 		var movement_force = velocity.length() * walking_velocity_to_force_ratio
 		var force = max(impact_force, movement_force)
 		if force > generate_ripple_threshold and ripple_timer.time_left == 0:
-			SoundRipples.add_ripple(collision.get_position(), 1.0, 512.0, force) 
+			#SoundRipples.add_ripple(collision.get_position(), 1.0, 512.0, force) 
 			ripple_timer.start()
 			return

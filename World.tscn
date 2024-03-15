@@ -1,27 +1,27 @@
 [gd_scene load_steps=15 format=3 uid="uid://bww2xlda4yq52"]
 
-[ext_resource type="Texture2D" uid="uid://n6u4nfreinpj" path="res://textures/grid.png" id="1_hvwhp"]
-[ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_nhcmf"]
-[ext_resource type="Shader" path="res://collision.gdshader" id="1_r6hcl"]
-[ext_resource type="Script" path="res://Player.gd" id="1_vvp3e"]
-[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="4_1u77r"]
-[ext_resource type="Script" path="res://Ripples.gd" id="4_sm2rk"]
-[ext_resource type="Shader" path="res://ripple_canvas.gdshader" id="4_xicoq"]
-[ext_resource type="Shader" path="res://ripple_simulation.gdshader" id="5_6rx6j"]
+[ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
+[ext_resource type="Texture2D" uid="uid://n6u4nfreinpj" path="res://textures/grid.png" id="2_yd4d7"]
+[ext_resource type="Script" path="res://DebugPlayer.gd" id="3_8kg1l"]
+[ext_resource type="Shader" path="res://sound_ripples/collision.gdshader" id="4_t2lfi"]
+[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_d2sjn"]
+[ext_resource type="Shader" path="res://sound_ripples/ripples.gdshader" id="6_bmjpl"]
+[ext_resource type="Script" path="res://sound_ripples/Ripples.gd" id="7_tc7sj"]
+[ext_resource type="Shader" path="res://sound_ripples/simulation.gdshader" id="8_1qfcl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nxubg"]
-shader = ExtResource("1_r6hcl")
+shader = ExtResource("4_t2lfi")
 shader_parameter/speed = null
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcpiq"]
 radius = 15.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_slv3u"]
-shader = ExtResource("4_xicoq")
+shader = ExtResource("6_bmjpl")
 shader_parameter/amplitude = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_40tma"]
-shader = ExtResource("5_6rx6j")
+shader = ExtResource("8_1qfcl")
 shader_parameter/a = null
 shader_parameter/amplitude = null
 shader_parameter/grid_points = null
@@ -37,29 +37,29 @@ visibility_layer = 3
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
-texture = ExtResource("1_nhcmf")
+texture = ExtResource("1_sce1a")
 
 [node name="Grid" type="Sprite2D" parent="."]
 modulate = Color(0.215686, 0.192157, 1, 1)
 position = Vector2(481, 304)
 scale = Vector2(3, 3)
-texture = ExtResource("1_hvwhp")
+texture = ExtResource("2_yd4d7")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 visibility_layer = 3
 position = Vector2(600, 300)
-script = ExtResource("1_vvp3e")
+script = ExtResource("3_8kg1l")
 metadata/_edit_group_ = true
 
 [node name="CollisionMesh" type="Sprite2D" parent="Player"]
 visibility_layer = 2
 material = SubResource("ShaderMaterial_nxubg")
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("4_1u77r")
+texture = ExtResource("5_d2sjn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("4_1u77r")
+texture = ExtResource("5_d2sjn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CircleShape2D_bcpiq")
@@ -74,7 +74,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("4_sm2rk")
+script = ExtResource("7_tc7sj")
 grid_points = Vector2i(240, 135)
 wave_speed = 0.2
 

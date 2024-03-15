@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcc7lgobm60rh"]
 
-[ext_resource type="PackedScene" uid="uid://cw7rj5k7yg2at" path="res://objects/audible_object.tscn" id="1_oc2al"]
-[ext_resource type="Script" path="res://objects/rock.gd" id="2_2effm"]
+[ext_resource type="PackedScene" uid="uid://cw7rj5k7yg2at" path="res://objects/AudibleObject.tscn" id="1_oc2al"]
+[ext_resource type="Script" path="res://objects/Rock.gd" id="2_2effm"]
 [ext_resource type="Texture2D" uid="uid://cy32ov5kfeixm" path="res://icon.svg" id="3_ktw0v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uobx"]

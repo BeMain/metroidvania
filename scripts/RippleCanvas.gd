@@ -34,10 +34,6 @@ func _ready():
 	
 	simulation_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 	
-	var root_viewport = get_tree().root.get_viewport()
-	root_viewport.canvas_cull_mask = 1
-	collision_viewport.world_2d = root_viewport.world_2d
-	
 	# Set simulation and collision textures from viewports
 	simulation_texture = simulation_viewport.get_texture()
 	collision_texture = collision_viewport.get_texture()

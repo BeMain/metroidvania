@@ -1,0 +1,132 @@
+[gd_scene load_steps=16 format=3 uid="uid://bww2xlda4yq52"]
+
+[ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
+[ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
+[ext_resource type="Script" path="res://Debug_Player.gd" id="3_8kg1l"]
+[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_d2sjn"]
+[ext_resource type="Shader" path="res://shaders/ripple_canvas.gdshader" id="6_bmjpl"]
+[ext_resource type="Script" path="res://scripts/RippleCanvas.gd" id="7_tc7sj"]
+[ext_resource type="Shader" path="res://shaders/ripple_simulation.gdshader" id="8_1qfcl"]
+[ext_resource type="Script" path="res://Debug_FPS.gd" id="10_rb2tv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnl5o"]
+size = Vector2(300, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mrw4g"]
+size = Vector3(300, 50, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bcpiq"]
+radius = 15.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_slv3u"]
+shader = ExtResource("6_bmjpl")
+shader_parameter/amplitude = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40tma"]
+shader = ExtResource("8_1qfcl")
+shader_parameter/a = null
+shader_parameter/amplitude = null
+shader_parameter/grid_points = null
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lrtsj"]
+viewport_path = NodePath("Ripples/SimulationViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uwrvm"]
+viewport_path = NodePath("Ripples/CollisionViewport")
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_sce1a")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(456, 481)
+rotation = 0.154966
+scale = Vector2(5, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_mnl5o")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+mesh = SubResource("BoxMesh_mrw4g")
+
+[node name="Rock" parent="." instance=ExtResource("3_00he0")]
+position = Vector2(401, 236)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(600, 300)
+script = ExtResource("3_8kg1l")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_d2sjn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CircleShape2D_bcpiq")
+metadata/_edit_lock_ = true
+
+[node name="Ripples" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_slv3u")
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("7_tc7sj")
+grid_points = Vector2i(240, 135)
+wave_speed = 0.2
+mesh_amplitude = 0.1
+metadata/_edit_lock_ = true
+
+[node name="SimulationViewport" type="SubViewport" parent="Ripples"]
+disable_3d = true
+gui_disable_input = true
+size = Vector2i(480, 256)
+render_target_update_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="Ripples/SimulationViewport"]
+material = SubResource("ShaderMaterial_40tma")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CollisionViewport" type="SubViewport" parent="Ripples"]
+disable_3d = true
+gui_disable_input = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Background" type="ColorRect" parent="Ripples/CollisionViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SimulationVisualization" type="TextureRect" parent="UI"]
+offset_right = 480.0
+offset_bottom = 256.0
+texture = SubResource("ViewportTexture_lrtsj")
+
+[node name="CollisionVisualization" type="TextureRect" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -382.0
+offset_right = 1920.0
+offset_bottom = 698.0
+grow_vertical = 0
+scale = Vector2(0.25, 0.25)
+texture = SubResource("ViewportTexture_uwrvm")
+
+[node name="FPS" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("10_rb2tv")

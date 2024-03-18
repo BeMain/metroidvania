@@ -117,11 +117,13 @@ color = Color(0, 0, 0, 1)
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="SimulationVisualization" type="TextureRect" parent="UI"]
+visible = false
 offset_right = 480.0
 offset_bottom = 256.0
 texture = SubResource("ViewportTexture_lrtsj")
 
 [node name="CollisionVisualization" type="TextureRect" parent="UI"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

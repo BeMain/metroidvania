@@ -29,9 +29,6 @@ var collision_texture: ViewportTexture
 
 
 func _ready():
-	# When the window changes size, resize collision_viewport
-	get_tree().get_root().size_changed.connect(resize_window)
-	
 	simulation_viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 	
 	# Set simulation and collision textures from viewports
@@ -114,8 +111,9 @@ func update_height_map():
 	simulation_material.get_shader_parameter("z_tex").set_image(img) # Set the current height map from current render
 
 
+## Resize the collision viewport to match the size of the visible rect
 func resize_window():
 	if is_inside_tree():
-		var screen_size = DisplayServer.window_get_size()
-		size = screen_size
-		collision_viewport.size = screen_size
+		var new_size = get_tree().get_root().get_visible_rect().size
+		size = new_size
+		collision_viewport.size = new_size

@@ -1,7 +1,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform int pixel_size = 8;
+uniform int pixel_size = 4;
 
 void fragment()
 {

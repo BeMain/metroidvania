@@ -1,9 +1,9 @@
 shader_type canvas_item;
-render_mode world_vertex_coords;
+render_mode unshaded, world_vertex_coords;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
-uniform int pixel_size = 8;
+uniform int pixel_size = 4;
 
 /// The zoom level of the root viewport
 uniform vec2 zoom = vec2(1.0);

@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bww2xlda4yq52"]
+[gd_scene load_steps=19 format=3 uid="uid://bww2xlda4yq52"]
 
 [ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
 [ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
+[ext_resource type="PackedScene" uid="uid://nv83l26l1raj" path="res://objects/Grass.tscn" id="3_4oeua"]
 [ext_resource type="Script" path="res://Debug_Player.gd" id="3_8kg1l"]
 [ext_resource type="Shader" path="res://shaders/pixelate.gdshader" id="3_huvc7"]
 [ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_d2sjn"]
@@ -45,6 +46,9 @@ viewport_path = NodePath("Ripples/CollisionViewport")
 material = SubResource("ShaderMaterial_drdbj")
 position = Vector2(960, 540)
 texture = ExtResource("1_sce1a")
+
+[node name="Grass" parent="." instance=ExtResource("3_4oeua")]
+position = Vector2(564, 319)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(456, 481)

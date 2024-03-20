@@ -39,7 +39,7 @@ func _ready():
 	set_grid_points(grid_points)
 	
 	# Set uniforms of mesh shader
-	surface_material.set_shader_parameter("simulation_texture", simulation_texture)
+	surface_material.set_shader_parameter("simulation_texture", simulation_texture) 
 	surface_material.set_shader_parameter("collision_texture", collision_texture)
 	surface_material.set_shader_parameter("amplitude", mesh_amplitude)
 

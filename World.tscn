@@ -1,11 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://bww2xlda4yq52"]
+[gd_scene load_steps=26 format=3 uid="uid://bww2xlda4yq52"]
 
 [ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
 [ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
-[ext_resource type="PackedScene" uid="uid://nv83l26l1raj" path="res://objects/Grass.tscn" id="3_4oeua"]
 [ext_resource type="Script" path="res://Debug_Player.gd" id="3_8kg1l"]
 [ext_resource type="Shader" path="res://shaders/pixelate.gdshader" id="3_huvc7"]
+[ext_resource type="PackedScene" uid="uid://bklu0d82sxmd" path="res://objects/PixelateGroup.tscn" id="3_qxg0s"]
+[ext_resource type="Shader" path="res://shaders/pixelate_group.gdshader" id="4_yj1rc"]
 [ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_d2sjn"]
+[ext_resource type="Texture2D" uid="uid://573ydlf8blad" path="res://textures/grass.svg" id="5_m3o80"]
+[ext_resource type="Shader" path="res://Debug_grass.gdshader" id="5_xr2cx"]
 [ext_resource type="Shader" path="res://shaders/ripple_canvas.gdshader" id="6_bmjpl"]
 [ext_resource type="Script" path="res://scripts/RippleCanvas.gd" id="7_tc7sj"]
 [ext_resource type="Shader" path="res://shaders/ripple_simulation.gdshader" id="8_1qfcl"]
@@ -14,6 +17,29 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drdbj"]
 shader = ExtResource("3_huvc7")
 shader_parameter/pixel_size = 16
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ktp4p"]
+shader = ExtResource("4_yj1rc")
+shader_parameter/pixel_size = 4
+shader_parameter/zoom = Vector2(3.7755, 3.7755)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x52vr"]
+shader = ExtResource("5_xr2cx")
+shader_parameter/speed = 3.0
+shader_parameter/magnitude = 10.0
+shader_parameter/pixel_size = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8knv"]
+shader = ExtResource("5_xr2cx")
+shader_parameter/speed = 3.0
+shader_parameter/magnitude = 10.0
+shader_parameter/pixel_size = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qq5c4"]
+shader = ExtResource("5_xr2cx")
+shader_parameter/speed = 3.0
+shader_parameter/magnitude = 10.0
+shader_parameter/pixel_size = 8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnl5o"]
 size = Vector2(300, 50)
@@ -46,9 +72,32 @@ viewport_path = NodePath("Ripples/CollisionViewport")
 material = SubResource("ShaderMaterial_drdbj")
 position = Vector2(960, 540)
 texture = ExtResource("1_sce1a")
+metadata/_edit_lock_ = true
 
-[node name="Grass" parent="." instance=ExtResource("3_4oeua")]
-position = Vector2(564, 319)
+[node name="Grass" parent="." instance=ExtResource("3_qxg0s")]
+material = SubResource("ShaderMaterial_ktp4p")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Grass"]
+material = SubResource("ShaderMaterial_x52vr")
+position = Vector2(1018.11, 501.535)
+rotation = 0.175883
+scale = Vector2(0.228072, 0.328715)
+texture = ExtResource("5_m3o80")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Grass"]
+material = SubResource("ShaderMaterial_r8knv")
+position = Vector2(1062.73, 515.902)
+rotation = 0.175883
+scale = Vector2(0.210846, 0.275125)
+texture = ExtResource("5_m3o80")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Grass"]
+material = SubResource("ShaderMaterial_qq5c4")
+position = Vector2(1047.16, 521.407)
+rotation = 0.176278
+scale = Vector2(0.159125, 0.210856)
+texture = ExtResource("5_m3o80")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(456, 481)

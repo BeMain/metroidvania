@@ -21,19 +21,16 @@ shader_parameter/pixel_size = 4
 shader = ExtResource("5_xr2cx")
 shader_parameter/speed = 3.0
 shader_parameter/magnitude = 10.0
-shader_parameter/pixel_size = 8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r8knv"]
 shader = ExtResource("5_xr2cx")
 shader_parameter/speed = 3.0
 shader_parameter/magnitude = 10.0
-shader_parameter/pixel_size = 8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qq5c4"]
 shader = ExtResource("5_xr2cx")
 shader_parameter/speed = 3.0
 shader_parameter/magnitude = 10.0
-shader_parameter/pixel_size = 8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnl5o"]
 size = Vector2(300, 50)

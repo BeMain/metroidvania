@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bklu0d82sxmd"]
+
+[ext_resource type="Shader" path="res://shaders/pixelate_group.gdshader" id="1_5rl58"]
+[ext_resource type="Script" path="res://scripts/PixelateGroup.gd" id="2_8ii64"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sc6ux"]
+shader = ExtResource("1_5rl58")
+shader_parameter/pixel_size = 4
+shader_parameter/zoom = Vector2(1, 1)
+
+[node name="PixelateGroup" type="CanvasGroup"]
+material = SubResource("ShaderMaterial_sc6ux")
+script = ExtResource("2_8ii64")

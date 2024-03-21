@@ -1,7 +1,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform int pixel_size = 8;
+uniform int pixel_size = 4;
 
 void fragment()
 {
@@ -9,5 +9,5 @@ void fragment()
 	vec2 pixel_uv = (vec2(ivec2( UV * num_divisions ))+0.5) / num_divisions;
 	// read the texture using the highest LOD to avoid 
 	// filtering problems on discontinuities
-	COLOR = textureLod( TEXTURE, pixel_uv, 0);; 
+	COLOR = textureLod( TEXTURE, pixel_uv, 0);
 }

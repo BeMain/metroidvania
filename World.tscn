@@ -103,10 +103,9 @@ mesh = SubResource("BoxMesh_mrw4g")
 
 [node name="PixelateGroup" parent="." instance=ExtResource("3_qxg0s")]
 position = Vector2(401, 236)
-scale = Vector2(1, 1)
 
 [node name="Rock" parent="PixelateGroup" instance=ExtResource("3_00he0")]
-position = Vector2(-3.05176e-05, -1.52588e-05)
+position = Vector2(58, 7)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(600, 300)

@@ -31,7 +31,7 @@ void fragment() {
 	vec3 collision_state_old = texture(old_collision_texture, UV).rgb;
 	vec3 collision_state_new = texture(collision_texture, UV).rgb;
 	
-	// Each channel represents one 'layer' of sound.
+	// Each channel represents one 'type' of sound.
 	vec3 new_z = z.rgb;
 	
 	if (length(collision_state_new) > 0.0f && length(collision_state_old) == 0.0f) {

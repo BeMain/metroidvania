@@ -9,9 +9,9 @@ void fragment() {
 	vec4 tex = texture(simulation_texture, UV);
 	vec4 tex_dx = texture(simulation_texture, UV + vec2(0.01, 0.0));
 	vec4 tex_dy = texture(simulation_texture, UV + vec2(0.0, 0.01));
-	float height = tex.r - tex.g;
-	float height_dx = tex_dx.r - tex_dx.g;
-	float height_dy = tex_dy.r - tex_dy.g;
+	float height = tex.b;
+	float height_dx = tex_dx.b;
+	float height_dy = tex_dy.b;
 	vec2 displacement = (vec2(height_dx, height_dy) - height) * amplitude;
 	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - displacement);
 }

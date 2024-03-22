@@ -19,7 +19,7 @@ const float damping = 0.99f;
 const float treshold = 0.008f;
 
 void fragment() {
-	vec2 pix_size = vec2(1.0f)/grid_points;
+	vec2 pix_size = vec2(1.0f) / grid_points;
 	
 	vec4 z = a * (texture(z_tex, UV + vec2(pix_size.x, 0.0f))
 				+ texture(z_tex, UV - vec2(pix_size.x, 0.0f))
@@ -27,29 +27,27 @@ void fragment() {
 				+ texture(z_tex, UV - vec2(0.0f, pix_size.y)))
 			+ (2.0f - 4.0f * a) * (texture(z_tex, UV)) - (texture(old_z_tex, UV));
 	z *= damping;
-				
-	float z_new_pos = z.r; // positive waves are stored in the red channel
-	float z_new_neg = z.g; // negative waves are stored in the green channel
 	
-	float collision_state_old = texture(old_collision_texture, UV).r;
-	float collision_state_new = texture(collision_texture, UV).r;
+	vec3 collision_state_old = texture(old_collision_texture, UV).rgb;
+	vec3 collision_state_new = texture(collision_texture, UV).rgb;
 	
-	if (collision_state_new > 0.0f && collision_state_old == 0.0f) {
-		z_new_pos = amplitude * collision_state_new;
-	} else if (collision_state_new == 0.0f && collision_state_old > 0.0f) {
-		z_new_neg = amplitude * collision_state_old;
+	// Each channel represents one 'type' of sound.
+	vec3 new_z = z.rgb;
+	
+	if (length(collision_state_new) > 0.0f && length(collision_state_old) == 0.0f) {
+		new_z = amplitude * collision_state_new;
 	}
-	
 	
 	float land = texture(land_texture, UV).r;
 	if (UV.x <= pix_size.x || UV.x >= 1.0f - pix_size.x  // Avoid waves bouncing on the borders
 	 || UV.y <= pix_size.y || UV.y >= 1.0f - pix_size.y
 	 || land > 0.0f  // Remove waves that collide with land masses
-	 || length(vec2(z_new_pos, z_new_neg)) < treshold
 	) {
-		z_new_pos = 0.0f;
-		z_new_neg = 0.0f;
+		new_z = vec3(0.0f);
 	}
+	if (new_z.r < treshold) new_z.r = 0.0f;
+	if (new_z.g < treshold) new_z.g = 0.0f;
+	if (new_z.b < treshold) new_z.b = 0.0f;
 	
-	COLOR = vec4(z_new_pos, 0.0f, z_new_neg, 1.0f);
+	COLOR = vec4(new_z, 1.0);
 }

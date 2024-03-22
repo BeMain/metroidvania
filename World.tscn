@@ -125,8 +125,8 @@ material = SubResource("ShaderMaterial_slv3u")
 offset_right = 1920.0
 offset_bottom = 1080.0
 script = ExtResource("7_tc7sj")
-grid_points = Vector2i(240, 135)
-wave_speed = 0.2
+grid_points = Vector2i(192, 108)
+wave_speed = 0.28
 mesh_amplitude = 0.1
 metadata/_edit_lock_ = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bww2xlda4yq52"]
+[gd_scene load_steps=23 format=3 uid="uid://bww2xlda4yq52"]
 
 [ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
 [ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
@@ -53,9 +53,6 @@ shader_parameter/grid_points = null
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lrtsj"]
 viewport_path = NodePath("Ripples/SimulationViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_uwrvm"]
-viewport_path = NodePath("Ripples/CollisionViewport")
 
 [node name="World" type="Node2D"]
 
@@ -144,41 +141,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CollisionViewport" type="SubViewport" parent="Ripples"]
-disable_3d = true
-gui_disable_input = true
-size = Vector2i(1920, 1080)
-render_target_update_mode = 4
-
-[node name="Background" type="ColorRect" parent="Ripples/CollisionViewport"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0, 0, 0, 1)
-
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="SimulationVisualization" type="TextureRect" parent="UI"]
-visible = false
 offset_right = 480.0
 offset_bottom = 256.0
 texture = SubResource("ViewportTexture_lrtsj")
-
-[node name="CollisionVisualization" type="TextureRect" parent="UI"]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -382.0
-offset_right = 1920.0
-offset_bottom = 698.0
-grow_vertical = 0
-scale = Vector2(0.25, 0.25)
-texture = SubResource("ViewportTexture_uwrvm")
 
 [node name="FPS" type="Label" parent="UI"]
 offset_right = 40.0

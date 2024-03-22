@@ -13,8 +13,6 @@ extends ColorRect
 
 ## Viewport that contains the simulation texture
 @onready var simulation_viewport: SubViewport = $SimulationViewport
-## Viewport that contains the collision texture
-@onready var collision_viewport: SubViewport = $CollisionViewport
 ## Material that contains the simulation shader
 @onready var simulation_material: ShaderMaterial = simulation_viewport.get_node("ColorRect").material
 ## Material of the surface, where ripples are displayed
@@ -25,7 +23,7 @@ var surface_data = PackedByteArray()
 
 ## Viewport textures that contain the rendered height and collision maps
 var simulation_texture: ViewportTexture
-var collision_texture: ViewportTexture
+var collision_image: Image
 
 
 func _ready():
@@ -33,7 +31,6 @@ func _ready():
 	
 	# Set simulation and collision textures from viewports
 	simulation_texture = simulation_viewport.get_texture()
-	collision_texture = collision_viewport.get_texture()
 	
 	resize_window()
 	set_grid_points(grid_points)
@@ -45,8 +42,8 @@ func _ready():
 
 func _initialize():
 	# Create an empty texture
-	var img = Image.create(grid_points.x, grid_points.y, false, Image.FORMAT_RGB8)
-	var tex = ImageTexture.create_from_image(img)
+	collision_image = Image.create(grid_points.x, grid_points.y, false, Image.FORMAT_RGB8)
+	var tex = ImageTexture.create_from_image(collision_image)
 
 	# Initialize the simulation with the empty texture
 	simulation_material.set_shader_parameter("z_tex", tex)
@@ -94,12 +91,13 @@ func set_grid_points(p_grid_points):
 
 ## Update the collision texture
 func update_collision_texture():
-	var img = collision_texture.get_image() # Get the currently rendered map
-	img.resize(grid_points.x, grid_points.y) # Scale to the correct grid size
 	# Set current map as old map
 	var old_collision_texture = simulation_material.get_shader_parameter("collision_texture")
 	simulation_material.get_shader_parameter("old_collision_texture").set_image(old_collision_texture.get_image())
-	simulation_material.get_shader_parameter("collision_texture").set_image(img) # Set the current collision map from current render
+	simulation_material.get_shader_parameter("collision_texture").set_image(collision_image) # Set the current collision map from current render
+	
+	# Clear the collision map
+	collision_image.fill(Color(0.0, 0.0, 0.0))
 
 ## Update the simulation texture
 func update_height_map():
@@ -110,9 +108,6 @@ func update_height_map():
 	simulation_material.get_shader_parameter("z_tex").set_image(img) # Set the current height map from current render
 
 
-## Resize the collision viewport to match the size of the visible rect
 func resize_window():
 	if is_inside_tree():
-		var new_size = get_tree().get_root().get_visible_rect().size
-		size = new_size
-		collision_viewport.size = new_size
+		size = get_tree().get_root().get_visible_rect().size

@@ -13,7 +13,7 @@ uniform sampler2D old_collision_texture;
 uniform sampler2D land_texture;
 
 /// Wave height is multiplied by this.
-const float damping = 0.99f;
+const float damping = 1.0f;
 
 /// Waves below this treshold are removed.
 const float treshold = 0.008f;

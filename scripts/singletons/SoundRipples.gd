@@ -11,7 +11,7 @@ var ripple_generator = preload("res://objects/RippleGenerator.tscn")
 ## Create a ripple at the specified position
 func add_ripple(position: Vector2, force: float):
 	var generator = ripple_generator.instantiate()
-	generator.modulate = Color(force, 1.0, 1.0)
+	generator.modulate = Color(force, 0.0, 0.0)
 	generator.global_position = position
 	ripple_canvas.get_node("CollisionViewport").add_child(generator)
 	

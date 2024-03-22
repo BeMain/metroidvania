@@ -17,7 +17,7 @@ void vertex() {
 void fragment() {
 	vec2 screen_size = vec2(textureSize(screen_texture, 0));
 	vec2 screen_position = zoom * world_pos - SCREEN_UV * screen_size;
-	vec2 pixel = zoom * floor(world_pos / float(pixel_size) + 0.5);
+	vec2 pixel = zoom * floor(world_pos / float(pixel_size));
 	vec2 relative_pixel = pixel - screen_position / float(pixel_size);
 	vec2 pixel_uv = (relative_pixel) * float(pixel_size) / screen_size;
 	

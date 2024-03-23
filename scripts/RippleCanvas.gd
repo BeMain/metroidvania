@@ -133,14 +133,14 @@ var d_pixels_excess := Vector2(0,0)
 
 ## Move the ripple canvas and shift the height maps
 ## Called when the canvas moves
-## TODO: The height maps are currently shifted too much.
 func _on_canvas_origin_changed(new_origin: Vector2):
 	# Move the canvas
 	global_position = -new_origin
 	
 	# Shift the height maps
 	var d_origin := new_origin - previous_canvas_origin
-	var d_pixels = d_origin * Vector2(grid_points) / Vector2(get_viewport().get_visible_rect().size) + d_pixels_excess # Add the fraction of a pixel that was truncated during the last shift
+	# I don't know why we multiply by 0.5 here... But it works :)
+	var d_pixels = 0.5 * d_origin * Vector2(grid_points) / Vector2(get_viewport().get_visible_rect().size) + d_pixels_excess # Add the fraction of a pixel that was truncated during the last shift
 	d_pixels_excess = d_pixels - Vector2(Vector2i(d_pixels)) # Store the fraction of the pixel that we lost this shift due to truncation, so that we can add it the next shift
 	
 	var z_tex = simulation_material.get_shader_parameter("z_tex")

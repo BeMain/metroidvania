@@ -120,13 +120,14 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
-[node name="Ripples" type="ColorRect" parent="."]
+[node name="Ripples" type="ColorRect" parent="." node_paths=PackedStringArray("simulation_viewport")]
 material = SubResource("ShaderMaterial_slv3u")
 offset_right = 1920.0
 offset_bottom = 1080.0
 script = ExtResource("7_tc7sj")
 wave_speed = 0.28
 mesh_amplitude = 0.1
+simulation_viewport = NodePath("SimulationViewport")
 metadata/_edit_lock_ = true
 
 [node name="SimulationViewport" type="SubViewport" parent="Ripples"]

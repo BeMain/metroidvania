@@ -19,7 +19,7 @@ var grid_size: Vector2 :
 @export var land_texture : Texture = ImageTexture.create_from_image(Image.create(1, 1, false, Image.FORMAT_RGB8))
 
 ## Viewport that contains the simulation texture
-@onready var simulation_viewport: SubViewport = $SimulationViewport
+@export var simulation_viewport: SubViewport
 ## Material that contains the simulation shader
 @onready var simulation_material: ShaderMaterial = simulation_viewport.get_node("ColorRect").material
 ## Material of the surface, where ripples are displayed

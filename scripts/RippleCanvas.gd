@@ -21,8 +21,9 @@ extends ColorRect
 # Current height map of the surface as raw byte array
 var surface_data = PackedByteArray()
 
-## Viewport textures that contain the rendered height and collision maps
+## Viewport texture that contains the rendered height
 var simulation_texture: ViewportTexture
+## The collision map
 var collision_image: Image
 
 
@@ -42,8 +43,11 @@ func _ready():
 
 func _initialize():
 	# Create an empty texture
-	collision_image = Image.create(grid_points.x, grid_points.y, false, Image.FORMAT_RGB8)
-	var tex = ImageTexture.create_from_image(collision_image)
+	var img = Image.create(grid_points.x, grid_points.y, false, Image.FORMAT_RGB8)
+	img.fill(Color(0.0, 0.0, 0.0))
+	var tex = ImageTexture.create_from_image(img)
+	
+	collision_image = img.duplicate(true)
 
 	# Initialize the simulation with the empty texture
 	simulation_material.set_shader_parameter("z_tex", tex)
@@ -56,9 +60,16 @@ func _initialize():
 	var delta = 1.0 / ProjectSettings.get_setting("physics/common/physics_ticks_per_second")
 	var a = wave_speed*wave_speed * delta*delta * grid_points.x * grid_points.y
 	if a > 0.5:
-		push_warning("a > 0.5; Unstable simulation.")
+		push_error("Sound ripples: a > 0.5; Unstable simulation.")
 	simulation_material.set_shader_parameter("a", a)
 	simulation_material.set_shader_parameter("amplitude", initial_amplitude)
+	
+	# Render one frame of the simulation viewport to make sure the simulation has been reset properly
+	lock = true
+	simulation_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+	# Wait until the frame is rendered, then unlock
+	await get_tree().process_frame
+	lock = false
 
 
 func _physics_process(_delta):
@@ -69,7 +80,7 @@ var lock = false
 func _update():
 	if not lock:
 		lock = true
-		update_collision_texture()
+		update_collision_map()
 		update_height_map()
 		
 		# Render one frame of the simulation viewport to update the simulation
@@ -90,7 +101,7 @@ func set_grid_points(p_grid_points):
 
 
 ## Update the collision texture
-func update_collision_texture():
+func update_collision_map():
 	# Set current map as old map
 	var old_collision_texture = simulation_material.get_shader_parameter("collision_texture")
 	simulation_material.get_shader_parameter("old_collision_texture").set_image(old_collision_texture.get_image())

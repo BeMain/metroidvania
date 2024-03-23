@@ -131,7 +131,7 @@ metadata/_edit_lock_ = true
 disable_3d = true
 gui_disable_input = true
 size = Vector2i(480, 256)
-render_target_update_mode = 1
+render_target_update_mode = 0
 
 [node name="ColorRect" type="ColorRect" parent="Ripples/SimulationViewport"]
 material = SubResource("ShaderMaterial_40tma")

@@ -43,7 +43,8 @@ radius = 15.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_slv3u"]
 shader = ExtResource("6_bmjpl")
-shader_parameter/amplitude = null
+shader_parameter/simulation_texture_margin = null
+shader_parameter/amplitude = 0.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_40tma"]
 shader = ExtResource("8_1qfcl")
@@ -124,7 +125,6 @@ material = SubResource("ShaderMaterial_slv3u")
 offset_right = 1920.0
 offset_bottom = 1080.0
 script = ExtResource("7_tc7sj")
-grid_points = Vector2i(192, 108)
 wave_speed = 0.28
 mesh_amplitude = 0.1
 metadata/_edit_lock_ = true

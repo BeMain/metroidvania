@@ -1,13 +1,20 @@
 extends ColorRect
 
 ## The number of grid points in the simulation
-@export var grid_points: Vector2i = Vector2i(512, 512): set = set_grid_points
+## TODO: Don't require this to have the same ratio as the screen
+@export var grid_points: Vector2i = Vector2i(192, 108): set = set_grid_points
+## The size of the additional area, outside of the screen, where ripples are simulated. In world coordinates.
+@export var simulation_margin: Vector2 = Vector2(288, 162)
+## The size of the area where ripples are simulated. In world coordinates.
+var grid_size: Vector2 :
+	get:
+		return 2 * simulation_margin + Vector2(ProjectSettings.get("display/window/size/viewport_width"), ProjectSettings.get("display/window/size/viewport_height"))
 ## The propagation speed of the waves
 @export var wave_speed = 0.065
 ## Amplitude of newly created waves in the simulation
 @export var initial_amplitude = 0.5
 ## Amplitude of the waves displayed on the canvas
-@export var mesh_amplitude = 1.0
+@export var mesh_amplitude = 0.5
 ## Texture for the land mass
 @export var land_texture : Texture = ImageTexture.create_from_image(Image.create(1, 1, false, Image.FORMAT_RGB8))
 
@@ -18,7 +25,7 @@ extends ColorRect
 ## Material of the surface, where ripples are displayed
 @onready var surface_material: ShaderMaterial = material
 
-# Current height map of the surface as raw byte array
+## Current height map of the surface as raw byte array
 var surface_data = PackedByteArray()
 
 ## Viewport texture that contains the rendered height
@@ -40,6 +47,7 @@ func _ready():
 	
 	# Set uniforms of mesh shader
 	surface_material.set_shader_parameter("simulation_texture", simulation_texture)
+	surface_material.set_shader_parameter("simulation_texture_margin", simulation_margin / grid_size)
 	surface_material.set_shader_parameter("amplitude", mesh_amplitude)
 
 
@@ -140,7 +148,7 @@ func _on_canvas_origin_changed(new_origin: Vector2):
 	# Shift the height maps
 	var d_origin := new_origin - previous_canvas_origin
 	# I don't know why we multiply by 0.5 here... But it works :)
-	var d_pixels = 0.5 * d_origin * Vector2(grid_points) / Vector2(get_viewport().get_visible_rect().size) + d_pixels_excess # Add the fraction of a pixel that was truncated during the last shift
+	var d_pixels = 0.5 * d_origin * Vector2(grid_points) / grid_size + d_pixels_excess # Add the fraction of a pixel that was truncated during the last shift
 	d_pixels_excess = d_pixels - Vector2(Vector2i(d_pixels)) # Store the fraction of the pixel that we lost this shift due to truncation, so that we can add it the next shift
 	
 	var z_tex = simulation_material.get_shader_parameter("z_tex")

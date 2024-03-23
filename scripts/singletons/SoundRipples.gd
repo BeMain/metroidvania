@@ -22,7 +22,7 @@ enum SoundType {
 
 ## Create a ripple at the specified [position] and with the specified sound [type].
 func add_ripple(position: Vector2, force: float, type: SoundType = SoundType.NEUTRAL):
-	var scaled_position = position * Vector2(ripple_canvas.grid_points) / Vector2(get_viewport().get_visible_rect().size)
+	var scaled_position = (get_viewport().canvas_transform.origin + position) * Vector2(ripple_canvas.grid_points) / Vector2(get_viewport().get_visible_rect().size)
 	var size: Vector2i = Vector2i(4, 4)
 	ripple_canvas.collision_image.fill_rect(Rect2i(Vector2i(scaled_position) - size / 2, size), Color(force * _type_to_color(type), 1.0))
 

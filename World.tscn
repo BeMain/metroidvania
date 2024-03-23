@@ -105,7 +105,7 @@ position = Vector2(401, 236)
 position = Vector2(58, 7)
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(600, 300)
+position = Vector2(576, 324)
 script = ExtResource("3_8kg1l")
 metadata/_edit_group_ = true
 
@@ -116,6 +116,8 @@ texture = ExtResource("5_d2sjn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CircleShape2D_bcpiq")
 metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="Ripples" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_slv3u")

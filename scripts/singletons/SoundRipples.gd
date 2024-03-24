@@ -22,9 +22,9 @@ enum SoundType {
 
 ## Create a ripple at the specified [position] and with the specified sound [type].
 func add_ripple(position: Vector2, force: float, type: SoundType = SoundType.NEUTRAL):
-	var scaled_position = (get_viewport().canvas_transform.origin + ripple_canvas.simulation_margin + position) * Vector2(ripple_canvas.grid_points) / ripple_canvas.grid_size
+	var pixel = (get_viewport().canvas_transform.origin + ripple_canvas.simulation_margin + position) * Vector2(ripple_canvas.grid_points) / ripple_canvas.grid_size
 	var size: Vector2i = Vector2i(4, 4)
-	ripple_canvas.collision_image.fill_rect(Rect2i(Vector2i(scaled_position) - size / 2, size), Color(force * _type_to_color(type), 1.0))
+	ripple_canvas.collision_image.fill_rect(Rect2i(Vector2i(pixel) - size / 2, size), Color(force * _type_to_color(type), 1.0))
 
 
 ## Get the color channel that the specified sound [type] is simulated on in the ripple simulation. 
@@ -38,3 +38,28 @@ func _type_to_color(type: SoundType) -> Color:
 			return Color(0.0, 0.0, 1.0) # Blue channel
 	
 	return Color(0.0, 0.0, 0.0) # No channel
+
+
+## Get the height of the sound ripple at the specified [position] and with the specified sound [type]
+func get_height(position: Vector2, type: SoundType = SoundType.NEUTRAL) -> float:
+	var pixel = Vector2i((get_viewport().canvas_transform.origin + ripple_canvas.simulation_margin + position) * Vector2(ripple_canvas.grid_points) / ripple_canvas.grid_size)
+	# If outside of the simulated area
+	if pixel.x < 0 or pixel.x >= ripple_canvas.grid_points.x or pixel.y < 0 or pixel.y >= ripple_canvas.grid_points.y:
+		return 0.0
+	
+	# Get height from simulation texture
+	# TODO: Maybe get the height from surface data (in RGB8 format) instead, since it should be faster. See the DynamicWaterDemo.
+	var image: Image = ripple_canvas.simulation_texture.get_image()
+	var color: Color = image.get_pixelv(pixel)
+	return _get_type_channel(color, type)
+
+## Get the value of the channel that the sound [type] is simulated on in the ripple simulation from [color].
+func _get_type_channel(color: Color, type: SoundType) -> float:
+	match type:
+		SoundType.HOSTILE:
+			return color.r
+		SoundType.FRIENDLY:
+			return color.g
+		SoundType.NEUTRAL:
+			return color.b
+	return 0 # No channel

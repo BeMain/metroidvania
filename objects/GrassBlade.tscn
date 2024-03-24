@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://nv83l26l1raj"]
+
+[ext_resource type="Shader" path="res://shaders/grass_blade.gdshader" id="1_iy2k1"]
+[ext_resource type="Texture2D" uid="uid://573ydlf8blad" path="res://textures/grass.svg" id="2_ncrn3"]
+[ext_resource type="Script" path="res://scripts/GrassBlade.gd" id="3_1kb3q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_agx5u"]
+shader = ExtResource("1_iy2k1")
+shader_parameter/displacement = 0.0
+
+[node name="GrassBlade" type="Sprite2D"]
+material = SubResource("ShaderMaterial_agx5u")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_ncrn3")
+script = ExtResource("3_1kb3q")

@@ -25,9 +25,6 @@ var grid_size: Vector2 :
 ## Material of the surface, where ripples are displayed
 @onready var surface_material: ShaderMaterial = material
 
-## Current height map of the surface as raw byte array
-var surface_data = PackedByteArray()
-
 ## Viewport texture that contains the rendered height
 var simulation_texture: ViewportTexture
 ## The collision map
@@ -84,7 +81,6 @@ func _initialize():
 var previous_canvas_origin := Vector2(0,0)
 func _physics_process(_delta):
 	_update()
-	surface_data = simulation_texture.get_image().get_data()
 	
 	var canvas_origin := get_viewport().canvas_transform.origin
 	if (canvas_origin != previous_canvas_origin):

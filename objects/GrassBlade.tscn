@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://scripts/GrassBlade.gd" id="3_1kb3q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_agx5u"]
+resource_local_to_scene = true
 shader = ExtResource("1_iy2k1")
 shader_parameter/displacement = 0.0
 

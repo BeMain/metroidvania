@@ -3,8 +3,8 @@ render_mode unshaded, world_vertex_coords;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_linear_mipmap;
 
+/// The size of the pixels
 uniform int pixel_size = 4;
-
 /// The zoom level of the root viewport
 uniform vec2 zoom = vec2(1.0);
 

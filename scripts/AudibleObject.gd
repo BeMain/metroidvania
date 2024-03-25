@@ -16,6 +16,7 @@ func _integrate_forces(state):
 	for i in state.get_contact_count():
 		var force: float = abs((prev_frame_linear_velocity - linear_velocity).project(state.get_contact_local_normal(i)).length()) * velocity_to_force_ratio
 		if force > generate_ripple_threshold:
+			print("Ripple generated")
 			SoundRipples.add_ripple(state.get_contact_collider_position(i), force) 
 	
 	# Store velocity for next frame

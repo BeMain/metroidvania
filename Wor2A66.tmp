@@ -182,4 +182,3 @@ script = ExtResource("10_rb2tv")
 
 [node name="Player" parent="." instance=ExtResource("13_lbc4n")]
 position = Vector2(295, 308)
-walk_anim_speed = 10.0

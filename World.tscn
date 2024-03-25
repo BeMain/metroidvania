@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bww2xlda4yq52"]
+[gd_scene load_steps=25 format=3 uid="uid://bww2xlda4yq52"]
 
 [ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
 [ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://shaders/pixelate.gdshader" id="3_huvc7"]
 [ext_resource type="PackedScene" uid="uid://bklu0d82sxmd" path="res://objects/PixelateGroup.tscn" id="3_qxg0s"]
 [ext_resource type="PackedScene" uid="uid://nv83l26l1raj" path="res://objects/GrassBlade.tscn" id="4_7e351"]
+[ext_resource type="Shader" path="res://shaders/pixelate_group.gdshader" id="4_e2p2f"]
 [ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="5_d2sjn"]
 [ext_resource type="Shader" path="res://shaders/grass_blade.gdshader" id="5_xr2cx"]
 [ext_resource type="Shader" path="res://shaders/ripple_canvas.gdshader" id="6_bmjpl"]
@@ -16,6 +17,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drdbj"]
 shader = ExtResource("3_huvc7")
 shader_parameter/pixel_size = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vyr6i"]
+resource_local_to_scene = true
+shader = ExtResource("4_e2p2f")
+shader_parameter/pixel_size = 2
+shader_parameter/zoom = Vector2(1.05946, 1.05946)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arw4q"]
 shader = ExtResource("5_xr2cx")
@@ -61,6 +68,8 @@ texture = ExtResource("1_sce1a")
 metadata/_edit_lock_ = true
 
 [node name="Grass" parent="." instance=ExtResource("3_qxg0s")]
+material = SubResource("ShaderMaterial_vyr6i")
+pixel_size = 2
 metadata/_edit_lock_ = true
 
 [node name="GrassBlade" parent="Grass" instance=ExtResource("4_7e351")]
@@ -90,11 +99,8 @@ shape = SubResource("RectangleShape2D_mnl5o")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
 mesh = SubResource("BoxMesh_mrw4g")
 
-[node name="PixelateGroup" parent="." instance=ExtResource("3_qxg0s")]
-position = Vector2(401, 236)
-
-[node name="Rock" parent="PixelateGroup" instance=ExtResource("3_00he0")]
-position = Vector2(58, 7)
+[node name="Rock" parent="." instance=ExtResource("3_00he0")]
+position = Vector2(459, 243)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(576, 324)

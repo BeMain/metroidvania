@@ -7,7 +7,7 @@ const JUMP_VELOCITY = -700.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction = 1
 
-@onready var _sim = $"../PixelateGroup/PlayerBody"
+@onready var _sim = $"PixelateGroup/PlayerBody"
 
 var _walk_timer = 0
 @export var walk_anim_speed:float
@@ -34,9 +34,8 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	var _target_pos = position
-	_target_pos += Vector2.UP * sin(_walk_timer*walk_anim_speed*2) * 5 if is_on_floor() else Vector2.ZERO
-	_sim.push(_target_pos - _sim.center)
+	var _delta_pos = Vector2.UP * sin(_walk_timer*walk_anim_speed*2) * 5 if is_on_floor() else Vector2.ZERO
+	_sim.push(_delta_pos - _sim.center)
 	
 	var leg_offset_angle_1 = -_walk_timer*walk_anim_speed*direction if is_on_floor() else 0
 	var leg_offset_angle_2 = -_walk_timer*walk_anim_speed*direction + PI if is_on_floor() else 0

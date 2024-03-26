@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bww2xlda4yq52"]
+[gd_scene load_steps=22 format=3 uid="uid://bww2xlda4yq52"]
 
 [ext_resource type="Shader" path="res://shaders/tileset.gdshader" id="2_ejph1"]
 [ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
@@ -8,11 +8,8 @@
 [ext_resource type="Shader" path="res://shaders/pixelate_group.gdshader" id="4_e2p2f"]
 [ext_resource type="Shader" path="res://shaders/grass_blade.gdshader" id="5_xr2cx"]
 [ext_resource type="Shader" path="res://shaders/ripple_canvas.gdshader" id="6_bmjpl"]
-[ext_resource type="CompressedTexture2DArray" uid="uid://big1hcg7w3ikq" path="res://textures/eyes.png" id="7_2orto"]
-[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="7_ay8rs"]
 [ext_resource type="Script" path="res://scripts/RippleCanvas.gd" id="7_tc7sj"]
 [ext_resource type="Shader" path="res://shaders/ripple_simulation.gdshader" id="8_1qfcl"]
-[ext_resource type="PackedScene" uid="uid://dbyd2fdcvhy4f" path="res://objects/ClosedStringSim.tscn" id="8_8f3wm"]
 [ext_resource type="Texture2D" uid="uid://d0t3jaaicetyp" path="res://textures/cave.jpg" id="9_yfoky"]
 [ext_resource type="Script" path="res://Debug_FPS.gd" id="10_rb2tv"]
 [ext_resource type="PackedScene" uid="uid://d0gfkr026nnm5" path="res://objects/Player.tscn" id="13_lbc4n"]
@@ -23,17 +20,11 @@ shader_parameter/old_colors = PackedColorArray(0.176471, 0.176471, 0.176471, 1, 
 shader_parameter/new_colors = PackedColorArray(0.156863, 0.121569, 0.054902, 1, 0.0156863, 0.235294, 0.184314, 1, 0.25098, 0.411765, 0.247059, 1, 0.905882, 0.941176, 0.278431, 1)
 shader_parameter/threshold = 0.1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbdia"]
-resource_local_to_scene = true
-shader = ExtResource("4_e2p2f")
-shader_parameter/pixel_size = 4
-shader_parameter/zoom = Vector2(1.05946, 1.05946)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vyr6i"]
 resource_local_to_scene = true
 shader = ExtResource("4_e2p2f")
 shader_parameter/pixel_size = 2
-shader_parameter/zoom = Vector2(1.05946, 1.05946)
+shader_parameter/zoom = Vector2(0.793701, 0.793701)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arw4q"]
 shader = ExtResource("5_xr2cx")
@@ -81,27 +72,6 @@ layer_0/tile_data = PackedInt32Array(196604, 65537, 1, 196605, 65537, 1, 131075,
 
 [node name="Rock" parent="." instance=ExtResource("3_00he0")]
 position = Vector2(470, 157)
-
-[node name="PixelateGroup" parent="." instance=ExtResource("3_qxg0s")]
-material = SubResource("ShaderMaterial_tbdia")
-
-[node name="PlayerBody" parent="PixelateGroup" instance=ExtResource("8_8f3wm")]
-width_multiplier = 0.9
-eye_texture = ExtResource("7_2orto")
-
-[node name="Eye" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
-scale = Vector2(5, 5)
-
-[node name="LegFront" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
-modulate = Color(0.372549, 0.666667, 0.933333, 1)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("7_ay8rs")
-
-[node name="LegBack" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
-modulate = Color(0.372549, 0.666667, 0.933333, 1)
-z_index = -1
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("7_ay8rs")
 
 [node name="Grass" parent="." instance=ExtResource("3_qxg0s")]
 material = SubResource("ShaderMaterial_vyr6i")
@@ -158,5 +128,5 @@ offset_bottom = 23.0
 script = ExtResource("10_rb2tv")
 
 [node name="Player" parent="." instance=ExtResource("13_lbc4n")]
-position = Vector2(295, 308)
+position = Vector2(311, 217)
 walk_anim_speed = 10.0

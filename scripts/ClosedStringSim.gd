@@ -20,7 +20,8 @@ var _leg_back_offset = Vector2.ZERO
 @export_category("Body parts")
 @export var eye_texture:CompressedTexture2DArray
 
-@onready var center = $"../../Player".position
+@onready var player = $"../.."
+@onready var center = player.global_position
 @onready var _points_distance = 2*PI*radius/points
 
 func _ready():
@@ -80,13 +81,13 @@ func _physics_process(delta):
 	polygon = _poly_points
 	
 	# Move bodyparts
-	var dir = $"../../Player".get_dir()
+	var dir = player.get_dir()
 	if dir:
 		_eye_indexes.z = _eye_indexes[(dir / 2) + 1]
 		$Eye.flip_h = false if dir == 1 else true
-	$Eye.position = _points[_eye_indexes.z] - $"../../Player".velocity.y * Vector2.UP / 70
+	$Eye.position = _points[_eye_indexes.z] - player.velocity.y * Vector2.UP / 70
 	
-	var vel = $"../../Player".velocity
+	var vel = player.velocity
 	var index = 2 if vel.y > 150 else (1 if vel.y < -150 else 0)
 	$Eye.texture = ImageTexture.create_from_image(eye_texture.get_layer_data(index))
 	

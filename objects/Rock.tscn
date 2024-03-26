@@ -1,7 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcc7lgobm60rh"]
+[gd_scene load_steps=7 format=3 uid="uid://bcc7lgobm60rh"]
 
 [ext_resource type="Script" path="res://scripts/Rock.gd" id="2_2effm"]
+[ext_resource type="PackedScene" uid="uid://bklu0d82sxmd" path="res://objects/PixelateGroup.tscn" id="2_840od"]
+[ext_resource type="Shader" path="res://shaders/pixelate_group.gdshader" id="3_71t7e"]
 [ext_resource type="Texture2D" uid="uid://cy32ov5kfeixm" path="res://icon.svg" id="3_ktw0v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k5r0b"]
+resource_local_to_scene = true
+shader = ExtResource("3_71t7e")
+shader_parameter/pixel_size = 4
+shader_parameter/zoom = Vector2(5.03968, 5.03968)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uobx"]
 radius = 40.0
@@ -13,7 +21,10 @@ max_contacts_reported = 8
 contact_monitor = true
 script = ExtResource("2_2effm")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="PixelateGroup" parent="." instance=ExtResource("2_840od")]
+material = SubResource("ShaderMaterial_k5r0b")
+
+[node name="Icon" type="Sprite2D" parent="PixelateGroup"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_ktw0v")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://2b4304wl21mk"]
+[gd_scene load_steps=9 format=3 uid="uid://c6eayms2xap7e"]
 
 [ext_resource type="Script" path="res://scripts/PlayerMovement.gd" id="1_pfkbn"]
 [ext_resource type="Texture2D" uid="uid://bpmweobtca8r" path="res://textures/Jerboa_body.png" id="2_uurn7"]

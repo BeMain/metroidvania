@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://djqbgqwen7v2g"]
 
-[ext_resource type="Shader" path="res://tilemap/tileset.gdshader" id="1_bm1om"]
+[ext_resource type="Shader" path="res://shaders/tileset.gdshader" id="1_bm1om"]
 [ext_resource type="TileSet" uid="uid://ddkujk40ex3w0" path="res://tilemap/palette.tres" id="2_in48f"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xohy3"]

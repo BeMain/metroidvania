@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_6qwq7"]
 [ext_resource type="PackedScene" uid="uid://bklu0d82sxmd" path="res://objects/PixelateGroup.tscn" id="2_pdy4w"]
 [ext_resource type="Shader" path="res://shaders/pixelate_group.gdshader" id="3_hmpsw"]
-[ext_resource type="PackedScene" uid="uid://dbyd2fdcvhy4f" path="res://objects/PlayerBody.tscn" id="4_hytni"]
-[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="6_kvhqh"]
-[ext_resource type="Texture2D" path="res://textures/eye.svg" id="7_8n25i"]
+[ext_resource type="Script" path="res://scripts/PlayerBody.gd" id="4_svada"]
+[ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/white_circle.svg" id="5_plkhp"]
+[ext_resource type="Texture2D" uid="uid://cc1r4w851mq5u" path="res://textures/eye.svg" id="7_8n25i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_346h8"]
 radius = 43.0
@@ -28,20 +28,24 @@ one_way_collision_margin = 0.0
 [node name="PixelateGroup" parent="." instance=ExtResource("2_pdy4w")]
 material = SubResource("ShaderMaterial_oje20")
 
-[node name="PlayerBody" parent="PixelateGroup" node_paths=PackedStringArray("eye") instance=ExtResource("4_hytni")]
+[node name="PlayerBody" type="Polygon2D" parent="PixelateGroup" node_paths=PackedStringArray("eye")]
+color = Color(0.294118, 0.729412, 0.933333, 1)
+antialiased = true
+script = ExtResource("4_svada")
 width_multiplier = 0.9
 eye = NodePath("Eye")
+eye_offset = Vector2(-6, 10)
 
 [node name="LegFront" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
 modulate = Color(0.372549, 0.666667, 0.933333, 1)
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("6_kvhqh")
+texture = ExtResource("5_plkhp")
 
 [node name="LegBack" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
 modulate = Color(0.372549, 0.666667, 0.933333, 1)
 z_index = -1
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("6_kvhqh")
+texture = ExtResource("5_plkhp")
 
 [node name="Eye" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
 scale = Vector2(0.5, 0.5)

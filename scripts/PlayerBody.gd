@@ -2,20 +2,20 @@ extends Polygon2D
 class_name PlayerBody
 
 @export_category("Shape")
-@export var radius: float
-@export var points: int
-@export var width_multiplier: float
+@export var radius: float = 45.0
+@export var points: int = 10
+@export var width_multiplier: float = 1.0
 
 @export_category("Behaviour")
-@export var target_force: float
-@export var interaction_force: float
-@export var dampening: float
-@export var push_spread: float
+@export var target_force: float = 2.0
+@export var interaction_force: float = 1.0
+@export var dampening: float = 0.3
+@export var push_spread: float = 0.8
 
 @export_category("Body parts")
 @onready var player: CharacterBody2D = owner
 @export var eye: Sprite2D
-@export var eye_offset: Vector2 = Vector2(-6, 10)
+@export var eye_offset: Vector2 = Vector2(0, 0)
 
 
 @onready var center = position

@@ -1,4 +1,25 @@
 extends Polygon2D
+class_name PlayerBody
+
+@export_category("Shape")
+@export var radius: float
+@export var points: int
+@export var width_multiplier: float
+
+@export_category("Behaviour")
+@export var target_force: float
+@export var interaction_force: float
+@export var dampening: float
+@export var push_spread: float
+
+@export_category("Body parts")
+@onready var player: CharacterBody2D = owner
+@export var eye: Sprite2D
+@export var eye_texture: CompressedTexture2DArray
+
+
+@onready var center = position
+@onready var _points_distance = 2*PI * radius / points
 
 var _points = []
 var _target_points = []
@@ -8,21 +29,8 @@ var _eye_indexes = Vector3(0,0,0)
 var _leg_index = 0
 var _leg_front_offset = Vector2.ZERO
 var _leg_back_offset = Vector2.ZERO
-@export_category("Shape")
-@export var radius:float
-@export var points:int
-@export var width_multiplier:float
-@export_category("Behaviour")
-@export var target_force:float
-@export var interaction_force:float
-@export var dampening:float
-@export var push_spread:float
-@export_category("Body parts")
-@export var eye_texture:CompressedTexture2DArray
 
-@onready var player = $"../.."
-@onready var center = player.global_position
-@onready var _points_distance = 2*PI*radius/points
+
 
 func _ready():
 	# Create points
@@ -81,15 +89,15 @@ func _physics_process(delta):
 	polygon = _poly_points
 	
 	# Move bodyparts
-	var dir = player.get_dir()
+	var dir = player.direction
 	if dir:
 		_eye_indexes.z = _eye_indexes[(dir / 2) + 1]
-		$Eye.flip_h = false if dir == 1 else true
-	$Eye.position = _points[_eye_indexes.z] - player.velocity.y * Vector2.UP / 70
+		eye.flip_h = false if dir == 1 else true
+	eye.position = _points[_eye_indexes.z] - player.velocity.y * Vector2.UP / 70
 	
 	var vel = player.velocity
 	var index = 2 if vel.y > 150 else (1 if vel.y < -150 else 0)
-	$Eye.texture = ImageTexture.create_from_image(eye_texture.get_layer_data(index))
+	eye.texture = ImageTexture.create_from_image(eye_texture.get_layer_data(index))
 	
 	var pos
 	if _leg_index != int(_leg_index):
@@ -115,8 +123,8 @@ func push(distance:Vector2):
 	# Move center
 	center += distance
 
-func set_front_leg_offset(offset:Vector2):
-	_leg_front_offset = _leg_front_offset.lerp(offset,0.2)
+func set_front_leg_offset(value: Vector2):
+	_leg_front_offset = _leg_front_offset.lerp(value,0.2)
 	
-func set_back_leg_offset(offset:Vector2):
-	_leg_back_offset = _leg_back_offset.lerp(offset,0.2)
+func set_back_leg_offset(value: Vector2):
+	_leg_back_offset = _leg_back_offset.lerp(value,0.2)

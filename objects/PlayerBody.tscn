@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbyd2fdcvhy4f"]
 
-[ext_resource type="Script" path="res://scripts/ClosedStringSim.gd" id="1_y6ldm"]
+[ext_resource type="Script" path="res://scripts/PlayerBody.gd" id="1_y6ldm"]
 
 [node name="ClosedStringSim" type="Polygon2D"]
 color = Color(0.294118, 0.729412, 0.933333, 1)

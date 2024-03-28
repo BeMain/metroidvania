@@ -1,46 +1,43 @@
 extends CharacterBody2D
 
+@export var body: PlayerBody
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -700.0
+@export_category("Movement")
+@export var speed: float = 300.0
+@export var jump_velocity: float = 700.0
+@export var walk_animation_speed: float = 10.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var direction = 1
-
-@onready var _sim = $"PixelateGroup/PlayerBody"
+var direction = 0
 
 var _walk_timer = 0
-@export var walk_anim_speed:float
 
 func _physics_process(delta):
-	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta * 2
+		velocity.y += gravity * delta * 2 # Gravity
 		_walk_timer = 0
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	# Handle jump
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = -jump_velocity
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	direction = Input.get_axis("ui_left", "ui_right")
+	direction = Input.get_axis("left", "right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * speed
 		_walk_timer += delta
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
 		_walk_timer = 0
 	
 	move_and_slide()
 	
-	var _delta_pos = Vector2.UP * sin(_walk_timer*walk_anim_speed*2) * 5 if is_on_floor() else Vector2.ZERO
-	_sim.push(_delta_pos - _sim.center)
+	var _delta_pos = Vector2.UP * sin(_walk_timer * walk_animation_speed*2) * 5 if is_on_floor() else Vector2.ZERO
+	body.push(_delta_pos - body.center)
 	
-	var leg_offset_angle_1 = -_walk_timer*walk_anim_speed*direction if is_on_floor() else 0
-	var leg_offset_angle_2 = -_walk_timer*walk_anim_speed*direction + PI if is_on_floor() else 0
-	_sim.set_front_leg_offset(Vector2(sin(leg_offset_angle_1)*30,cos(leg_offset_angle_1)*10 - 10))
-	_sim.set_back_leg_offset(Vector2(sin(leg_offset_angle_2)*30,cos(leg_offset_angle_2)*10 - 10))
+	var front_leg_offset_angle = -_walk_timer * walk_animation_speed * direction if is_on_floor() else 0
+	var back_leg_offset_angle = -_walk_timer * walk_animation_speed * direction + PI if is_on_floor() else 0
+	body.set_front_leg_offset(Vector2(sin(front_leg_offset_angle)*30, cos(front_leg_offset_angle)*10 - 10))
+	body.set_back_leg_offset(Vector2(sin(back_leg_offset_angle)*30, cos(back_leg_offset_angle)*10 - 10))
 
-func get_dir():
-	return direction

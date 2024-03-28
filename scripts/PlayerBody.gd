@@ -15,10 +15,11 @@ class_name PlayerBody
 @export_category("Body parts")
 @onready var player: CharacterBody2D = owner
 @export var eye: Sprite2D
-@export var eye_texture: CompressedTexture2DArray
+@export var eye_offset: Vector2 = Vector2(-6, 6)
 
 
 @onready var center = position
+@onready var direction = player.direction
 @onready var _points_distance = 2*PI * radius / points
 
 var _points = []
@@ -45,7 +46,7 @@ func _ready():
 	_points[3] += Vector2(10,10)
 	
 	# Define bodypart locations
-	_eye_indexes = Vector3(points - int(points / 8), int(points / 8),0)
+	_eye_indexes = Vector3(points - int(points / 8), int(points / 8), int(points / 8))
 	_leg_index = points / 2
 	
 	# Recalculate forces based on points count
@@ -89,15 +90,16 @@ func _physics_process(delta):
 	polygon = _poly_points
 	
 	# Move bodyparts
-	var dir = player.direction
-	if dir:
-		_eye_indexes.z = _eye_indexes[(dir / 2) + 1]
-		eye.flip_h = false if dir == 1 else true
-	eye.position = _points[_eye_indexes.z] - player.velocity.y * Vector2.UP / 70
+	if player.direction:
+		direction = player.direction
+		_eye_indexes.z = _eye_indexes[(direction / 2) + 1]
+	eye.position = _points[_eye_indexes.z] - player.velocity.y * Vector2.UP / 70 + eye_offset * Vector2(direction, 1)
 	
-	var vel = player.velocity
-	var index = 2 if vel.y > 150 else (1 if vel.y < -150 else 0)
-	eye.texture = ImageTexture.create_from_image(eye_texture.get_layer_data(index))
+	# Rotate the eye
+	if player.velocity:
+		eye.rotation = Vector2.RIGHT.angle_to(player.velocity)
+	else:
+		eye.rotation = PI if direction == -1 else 0
 	
 	var pos
 	if _leg_index != int(_leg_index):

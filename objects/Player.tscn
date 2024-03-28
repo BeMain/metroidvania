@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://bklu0d82sxmd" path="res://objects/PixelateGroup.tscn" id="2_pdy4w"]
 [ext_resource type="Shader" path="res://shaders/pixelate_group.gdshader" id="3_hmpsw"]
 [ext_resource type="PackedScene" uid="uid://dbyd2fdcvhy4f" path="res://objects/PlayerBody.tscn" id="4_hytni"]
-[ext_resource type="CompressedTexture2DArray" uid="uid://big1hcg7w3ikq" path="res://textures/eyes.png" id="5_ldk08"]
 [ext_resource type="Texture2D" uid="uid://b61d4et3xr2jv" path="res://textures/White_Circle.svg" id="6_kvhqh"]
+[ext_resource type="Texture2D" uid="uid://cc1r4w851mq5u" path="res://textures/eye.svg" id="7_8n25i"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_346h8"]
 radius = 43.0
@@ -15,7 +15,7 @@ height = 102.0
 resource_local_to_scene = true
 shader = ExtResource("3_hmpsw")
 shader_parameter/pixel_size = 4
-shader_parameter/zoom = Vector2(2.99661, 2.99661)
+shader_parameter/zoom = Vector2(4.75683, 4.75683)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body")]
 script = ExtResource("1_6qwq7")
@@ -30,8 +30,7 @@ material = SubResource("ShaderMaterial_oje20")
 
 [node name="PlayerBody" parent="PixelateGroup" node_paths=PackedStringArray("eye") instance=ExtResource("4_hytni")]
 width_multiplier = 0.9
-eye = NodePath("../../Eye")
-eye_texture = ExtResource("5_ldk08")
+eye = NodePath("Eye")
 
 [node name="LegFront" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
 modulate = Color(0.372549, 0.666667, 0.933333, 1)
@@ -44,5 +43,6 @@ z_index = -1
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("6_kvhqh")
 
-[node name="Eye" type="Sprite2D" parent="."]
-scale = Vector2(5, 5)
+[node name="Eye" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_8n25i")

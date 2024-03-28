@@ -24,7 +24,7 @@ shader_parameter/threshold = 0.1
 resource_local_to_scene = true
 shader = ExtResource("4_e2p2f")
 shader_parameter/pixel_size = 2
-shader_parameter/zoom = Vector2(4.75683, 4.75683)
+shader_parameter/zoom = Vector2(0.749154, 0.749154)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arw4q"]
 shader = ExtResource("5_xr2cx")
@@ -128,4 +128,4 @@ offset_bottom = 23.0
 script = ExtResource("10_rb2tv")
 
 [node name="Player" parent="." instance=ExtResource("13_lbc4n")]
-position = Vector2(311, 217)
+position = Vector2(260, 294)

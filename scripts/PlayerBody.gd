@@ -15,7 +15,7 @@ class_name PlayerBody
 @export_category("Body parts")
 @onready var player: CharacterBody2D = owner
 @export var eye: Sprite2D
-@export var eye_offset: Vector2 = Vector2(-6, 6)
+@export var eye_offset: Vector2 = Vector2(-6, 10)
 
 
 @onready var center = position
@@ -26,10 +26,10 @@ var _points = []
 var _target_points = []
 var _velocities = []
 var _poly_points = []
-var _eye_indexes = Vector3(0,0,0)
-var _leg_index = 0
-var _leg_front_offset = Vector2.ZERO
-var _leg_back_offset = Vector2.ZERO
+var _eye_indexes := Vector3(0,0,0)
+var _leg_index: int = 0
+var _leg_front_offset := Vector2.ZERO
+var _leg_back_offset := Vector2.ZERO
 
 
 
@@ -46,8 +46,8 @@ func _ready():
 	_points[3] += Vector2(10,10)
 	
 	# Define bodypart locations
-	_eye_indexes = Vector3(points - int(points / 8), int(points / 8), int(points / 8))
-	_leg_index = points / 2
+	_eye_indexes = Vector3(points - int(points / 8.0), int(points / 8.0), int(points / 8.0))
+	_leg_index = int(points / 2.0)
 	
 	# Recalculate forces based on points count
 	target_force /= points
@@ -97,9 +97,12 @@ func _physics_process(delta):
 	
 	# Rotate the eye
 	if player.velocity:
-		eye.rotation = Vector2.RIGHT.angle_to(player.velocity)
+		var angle = Vector2.UP.angle_to(player.velocity)
+		angle = direction * clamp(abs(angle), PI/4, 3*PI/4) # Limit the rotation
+		angle -= PI/2 # Rotation is counted relative to the positive x-axis (RIGHT), not the positive positive y-axis (UP).
+		eye.rotation = angle
 	else:
-		eye.rotation = PI if direction == -1 else 0
+		eye.rotation = PI if direction == -1 else 0.0 # Look straight ahead
 	
 	var pos
 	if _leg_index != int(_leg_index):

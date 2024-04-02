@@ -15,7 +15,7 @@ height = 102.0
 resource_local_to_scene = true
 shader = ExtResource("3_hmpsw")
 shader_parameter/pixel_size = 4
-shader_parameter/zoom = Vector2(0.420448, 0.420448)
+shader_parameter/zoom = Vector2(1.5874, 1.5874)
 
 [sub_resource type="Curve" id="Curve_txsye"]
 max_value = 30.0
@@ -41,9 +41,6 @@ color = Color(0.294118, 0.729412, 0.933333, 1)
 antialiased = true
 script = ExtResource("4_svada")
 width_multiplier = 0.9
-tummy_indexes = Vector2(6, 9)
-eye_offset = Vector2(-10, 15)
-ear_offset = Vector2(-10, -2)
 
 [node name="Tummy" type="Polygon2D" parent="PixelateGroup/PlayerBody"]
 

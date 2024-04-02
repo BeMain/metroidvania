@@ -9,8 +9,10 @@ class_name PlayerBody
 @export var width_multiplier: float = 1.0
 
 @export_subgroup("Behaviour")
-@export var target_force: float = 2.0
-@export var interaction_force: float = 1.0
+@export var target_force: float = 2.0 : 
+	get: return target_force / points
+@export var interaction_force: float = 1.0 :
+	get: return interaction_force / points
 @export var dampening: float = 0.3
 @export var push_spread: float = 0.8
 
@@ -61,11 +63,6 @@ func _ready():
 	_eye_indexes = Vector3(points - int(points / 8.0), int(points / 8.0), int(points / 8.0))
 	_leg_index = int(points / 2.0)
 	_ear_position = _points[0] + $Belly.offset
-	
-	# Recalculate forces based on points count
-	target_force /= points
-	interaction_force /= points
-	
 
 func _physics_process(delta):
 	# Move points

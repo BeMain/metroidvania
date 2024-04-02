@@ -15,7 +15,7 @@ height = 102.0
 resource_local_to_scene = true
 shader = ExtResource("3_hmpsw")
 shader_parameter/pixel_size = 4
-shader_parameter/zoom = Vector2(6.3496, 6.3496)
+shader_parameter/zoom = Vector2(1.7818, 1.7818)
 
 [sub_resource type="Curve" id="Curve_txsye"]
 max_value = 30.0
@@ -41,16 +41,20 @@ script = ExtResource("4_svada")
 
 [node name="LegBack" type="Sprite2D" parent="PixelateGroup/Body"]
 modulate = Color(0.372549, 0.666667, 0.933333, 1)
+position = Vector2(-7.92009e-09, 38)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("5_plkhp")
 
 [node name="Belly" type="Polygon2D" parent="PixelateGroup/Body"]
 color = Color(0.294118, 0.729412, 0.933333, 1)
 antialiased = true
+polygon = PackedVector2Array(6.82526, 40.8297, -6.82526, 40.8297, -20.4758, 38.3034, -31.742, 31.4843, -40.6241, 20.3723, -43.9694, 7.88011, -41.778, -5.99236, -36.9296, -18.6932, -29.4242, -30.2223, -19.2536, -38.9839, -6.41787, -44.9782, 6.41787, -44.9782, 19.2536, -38.9839, 29.4242, -30.2223, 36.9296, -18.6932, 41.778, -5.99236, 43.9694, 7.88011)
 
 [node name="Tummy" type="Polygon2D" parent="PixelateGroup/Body"]
+polygon = PackedVector2Array(6.82526, 40.8297, 20.4758, 38.3034, 31.742, 31.4843, 40.6241, 20.3723, 43.9694, 7.88011, 33.2438, 0.801285, 20.4158, 0.0336266, 8.92255, 5.78283, 1.84372, 16.5084, 1.07607, 29.3364)
 
 [node name="Ear" type="Line2D" parent="PixelateGroup/Body"]
+points = PackedVector2Array(-8.61959e-07, -42.9753, -10, -44.9753)
 width = 1.0
 width_curve = SubResource("Curve_txsye")
 default_color = Color(0.294118, 0.729412, 0.929412, 1)
@@ -59,14 +63,17 @@ end_cap_mode = 2
 
 [node name="LegFront" type="Sprite2D" parent="PixelateGroup/Body"]
 modulate = Color(0.372549, 0.666667, 0.933333, 1)
+position = Vector2(-7.92009e-09, 38)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("5_plkhp")
 
 [node name="Mouth" type="Sprite2D" parent="PixelateGroup/Body"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 scale = Vector2(0.02, 0.05)
 texture = ExtResource("5_plkhp")
 
 [node name="Eye" type="Sprite2D" parent="PixelateGroup/Body"]
+position = Vector2(15.6715, -20.9868)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_8n25i")

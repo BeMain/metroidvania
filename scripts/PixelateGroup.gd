@@ -1,5 +1,6 @@
 @tool
 extends CanvasGroup
+class_name PixelateGroup
 
 ## The size of the pixels
 @export var pixel_size: int = 4 : set = set_pixel_size

@@ -1,4 +1,4 @@
-extends Polygon2D
+extends Node2D
 class_name PlayerBody
 
 @export_subgroup("Shape")
@@ -25,7 +25,7 @@ class_name PlayerBody
 @export var pulsation_spread: float = 3
 @export var pulsation_width: float = 0.7
 
-@onready var player: CharacterBody2D = owner
+@onready var player: Player = owner
 ## The position of the center of the player. 
 ## Not always equal to player's position. For example, when moving, the player's center moves up and down, but the actual position stays the same.
 @onready var center = position
@@ -60,7 +60,7 @@ func _ready():
 	# Define bodypart locations
 	_eye_indexes = Vector3(points - int(points / 8.0), int(points / 8.0), int(points / 8.0))
 	_leg_index = int(points / 2.0)
-	_ear_position = _points[0] + offset
+	_ear_position = _points[0] + $Belly.offset
 	
 	# Recalculate forces based on points count
 	target_force /= points
@@ -120,9 +120,9 @@ func _physics_process(delta):
 	for i in to_remove:
 		_body_pulsations.remove_at(_body_pulsations.find(i))
 	
-	# Draw polygon (body + tummy)
-	var poly_points = _poly_points.slice(tummy_indexes[clamp(direction, 0, 1)] * direction) + _poly_points.slice(0, tummy_indexes[clamp(-direction, 0, 1)] * direction)
-	var tummy_polygon = _poly_points.slice(tummy_indexes[0]*direction - clamp(direction, 0, 1), tummy_indexes[1] * direction + clamp(direction*2, -2, 1), direction)
+	# Draw polygons (belly + tummy)
+	var belly_points = _poly_points.slice(tummy_indexes[clamp(direction, 0, 1)] * direction) + _poly_points.slice(0, tummy_indexes[clamp(-direction, 0, 1)] * direction)
+	var tummy_polygon = _poly_points.slice(tummy_indexes[0] * direction - clamp(direction, 0, 1), tummy_indexes[1] * direction + clamp(direction*2, -2, 1), direction)
 	var tummy_center = (tummy_polygon[0] + tummy_polygon[-1]) / 2
 	var tummy_radii = [(tummy_polygon[0] - tummy_center), (tummy_polygon[-1] - tummy_center)]
 	var vec = tummy_radii[0].normalized()
@@ -131,8 +131,8 @@ func _physics_process(delta):
 	for i in range(5):
 		vec = vec.rotated(-PI/6 * direction)
 		rad = move_toward(rad, tummy_radii[1].length(), i / 6.0)
-		tummy_polygon.append(tummy_center + (vec*rad))
-	polygon = poly_points
+		tummy_polygon.append(tummy_center + (vec * rad))
+	$Belly.polygon = belly_points
 	$Tummy.polygon = tummy_polygon
 	
 	# Move eye

@@ -11,11 +11,11 @@
 radius = 43.0
 height = 102.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oje20"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iafiq"]
 resource_local_to_scene = true
 shader = ExtResource("3_hmpsw")
 shader_parameter/pixel_size = 4
-shader_parameter/zoom = Vector2(1.5874, 1.5874)
+shader_parameter/zoom = Vector2(6.3496, 6.3496)
 
 [sub_resource type="Curve" id="Curve_txsye"]
 max_value = 30.0
@@ -24,7 +24,7 @@ point_count = 2
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body")]
 script = ExtResource("1_6qwq7")
-body = NodePath("PixelateGroup/PlayerBody")
+body = NodePath("PixelateGroup/Body")
 sneak_animation_speed = 13.0
 whistle_animation_speed = 8.0
 duck_animation_speed = 4.0
@@ -34,39 +34,39 @@ shape = SubResource("CapsuleShape2D_346h8")
 one_way_collision_margin = 0.0
 
 [node name="PixelateGroup" parent="." instance=ExtResource("2_pdy4w")]
-material = SubResource("ShaderMaterial_oje20")
+material = SubResource("ShaderMaterial_iafiq")
 
-[node name="PlayerBody" type="Polygon2D" parent="PixelateGroup"]
-color = Color(0.294118, 0.729412, 0.933333, 1)
-antialiased = true
+[node name="Body" type="Node2D" parent="PixelateGroup"]
 script = ExtResource("4_svada")
-width_multiplier = 0.9
 
-[node name="Tummy" type="Polygon2D" parent="PixelateGroup/PlayerBody"]
-
-[node name="Mouth" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
-modulate = Color(0, 0, 0, 1)
-scale = Vector2(0.02, 0.05)
+[node name="LegBack" type="Sprite2D" parent="PixelateGroup/Body"]
+modulate = Color(0.372549, 0.666667, 0.933333, 1)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("5_plkhp")
 
-[node name="Ear" type="Line2D" parent="PixelateGroup/PlayerBody"]
+[node name="Belly" type="Polygon2D" parent="PixelateGroup/Body"]
+color = Color(0.294118, 0.729412, 0.933333, 1)
+antialiased = true
+
+[node name="Tummy" type="Polygon2D" parent="PixelateGroup/Body"]
+
+[node name="Ear" type="Line2D" parent="PixelateGroup/Body"]
 width = 1.0
 width_curve = SubResource("Curve_txsye")
 default_color = Color(0.294118, 0.729412, 0.929412, 1)
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Eye" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
+[node name="LegFront" type="Sprite2D" parent="PixelateGroup/Body"]
+modulate = Color(0.372549, 0.666667, 0.933333, 1)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_plkhp")
+
+[node name="Mouth" type="Sprite2D" parent="PixelateGroup/Body"]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.02, 0.05)
+texture = ExtResource("5_plkhp")
+
+[node name="Eye" type="Sprite2D" parent="PixelateGroup/Body"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_8n25i")
-
-[node name="LegFront" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
-modulate = Color(0.372549, 0.666667, 0.933333, 1)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("5_plkhp")
-
-[node name="LegBack" type="Sprite2D" parent="PixelateGroup/PlayerBody"]
-modulate = Color(0.372549, 0.666667, 0.933333, 1)
-z_index = -1
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("5_plkhp")

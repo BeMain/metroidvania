@@ -7,8 +7,7 @@ extends ColorRect
 @export var simulation_margin: Vector2 = Vector2(288, 162)
 ## The size of the area where ripples are simulated. In world coordinates.
 var grid_size: Vector2 :
-	get:
-		return 2 * simulation_margin + Vector2(ProjectSettings.get("display/window/size/viewport_width"), ProjectSettings.get("display/window/size/viewport_height"))
+	get: return 2 * simulation_margin + Vector2(ProjectSettings.get("display/window/size/viewport_width"), ProjectSettings.get("display/window/size/viewport_height"))
 ## The propagation speed of the waves
 @export var wave_speed = 0.065
 ## Amplitude of newly created waves in the simulation

@@ -1,8 +1,8 @@
 extends Node
 
 ## The canvas where ripples are drawn
-@export var ripple_canvas_path: NodePath = ^"/root/World/Ripples"
-@onready var ripple_canvas: ColorRect = get_node(ripple_canvas_path)
+@export var ripple_canvas: ColorRect : 
+	get: return $/root/World/Ripples if ripple_canvas == null else ripple_canvas
 
 ## Representing different 'types' of sounds.
 enum SoundType {

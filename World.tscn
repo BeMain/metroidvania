@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bww2xlda4yq52"]
+[gd_scene load_steps=27 format=3 uid="uid://bww2xlda4yq52"]
 
 [ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
 [ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
@@ -12,6 +12,7 @@
 [ext_resource type="Shader" path="res://shaders/ripple_canvas.gdshader" id="6_bmjpl"]
 [ext_resource type="Script" path="res://scripts/RippleCanvas.gd" id="7_tc7sj"]
 [ext_resource type="Shader" path="res://shaders/ripple_simulation.gdshader" id="8_1qfcl"]
+[ext_resource type="Texture2D" uid="uid://dum6lcxsrgt5p" path="res://textures/point_light.webp" id="10_7dpya"]
 [ext_resource type="Script" path="res://Debug_FPS.gd" id="10_rb2tv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drdbj"]
@@ -22,7 +23,7 @@ shader_parameter/pixel_size = 4
 resource_local_to_scene = true
 shader = ExtResource("4_e2p2f")
 shader_parameter/pixel_size = 2
-shader_parameter/zoom = Vector2(1.05946, 1.05946)
+shader_parameter/zoom = Vector2(0.297302, 0.297302)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arw4q"]
 shader = ExtResource("5_xr2cx")
@@ -41,6 +42,9 @@ size = Vector2(300, 50)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mrw4g"]
 size = Vector3(300, 50, 0)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i7ac3"]
+polygon = PackedVector2Array(150, 25, -150, 25, -150, -25, 150, -25)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcpiq"]
 radius = 15.0
@@ -66,6 +70,9 @@ material = SubResource("ShaderMaterial_drdbj")
 position = Vector2(960, 540)
 texture = ExtResource("1_sce1a")
 metadata/_edit_lock_ = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 
 [node name="Grass" parent="." instance=ExtResource("3_qxg0s")]
 material = SubResource("ShaderMaterial_vyr6i")
@@ -99,11 +106,14 @@ shape = SubResource("RectangleShape2D_mnl5o")
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
 mesh = SubResource("BoxMesh_mrw4g")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+occluder = SubResource("OccluderPolygon2D_i7ac3")
+
 [node name="Rock" parent="." instance=ExtResource("3_00he0")]
 position = Vector2(459, 243)
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(475, 301)
 script = ExtResource("3_8kg1l")
 metadata/_edit_group_ = true
 
@@ -116,6 +126,10 @@ shape = SubResource("CircleShape2D_bcpiq")
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="PointLight2D" type="PointLight2D" parent="Player"]
+shadow_enabled = true
+texture = ExtResource("10_7dpya")
 
 [node name="Ripples" type="ColorRect" parent="." node_paths=PackedStringArray("simulation_viewport")]
 material = SubResource("ShaderMaterial_slv3u")

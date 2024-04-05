@@ -2,7 +2,7 @@
 /// Note that this does not work for scaled nodes. For that, use the PixelateGroup node.
 
 shader_type canvas_item;
-render_mode unshaded, world_vertex_coords;
+render_mode world_vertex_coords;
 
 /// The size of the pixels
 uniform int pixel_size = 4;

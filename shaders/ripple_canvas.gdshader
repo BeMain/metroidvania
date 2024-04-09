@@ -1,4 +1,6 @@
 shader_type canvas_item;
+render_mode unshaded;
+
 
 uniform sampler2D simulation_texture;
 /// The size of the additional area, outside of the screen, where ripples are simulated. In UV coordinates.

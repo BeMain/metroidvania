@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bww2xlda4yq52"]
+[gd_scene load_steps=28 format=3 uid="uid://bww2xlda4yq52"]
 
 [ext_resource type="Texture2D" uid="uid://iaf6b8qwaod2" path="res://textures/background.jpg" id="1_sce1a"]
 [ext_resource type="PackedScene" uid="uid://bcc7lgobm60rh" path="res://objects/Rock.tscn" id="3_00he0"]
@@ -15,6 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://dum6lcxsrgt5p" path="res://textures/point_light.webp" id="10_7dpya"]
 [ext_resource type="Script" path="res://Debug_FPS.gd" id="10_rb2tv"]
 
+[sub_resource type="Environment" id="Environment_xmre7"]
+background_mode = 3
+glow_enabled = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_drdbj"]
 shader = ExtResource("3_huvc7")
 shader_parameter/pixel_size = 4
@@ -23,7 +27,7 @@ shader_parameter/pixel_size = 4
 resource_local_to_scene = true
 shader = ExtResource("4_e2p2f")
 shader_parameter/pixel_size = 2
-shader_parameter/zoom = Vector2(0.297302, 0.297302)
+shader_parameter/zoom = Vector2(2.82843, 2.82843)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arw4q"]
 shader = ExtResource("5_xr2cx")
@@ -65,6 +69,9 @@ viewport_path = NodePath("Ripples/SimulationViewport")
 
 [node name="World" type="Node2D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xmre7")
+
 [node name="Background" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_drdbj")
 position = Vector2(960, 540)
@@ -72,9 +79,10 @@ texture = ExtResource("1_sce1a")
 metadata/_edit_lock_ = true
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.0627451, 0.0627451, 0.0627451, 1)
+color = Color(0.0117647, 0.0117647, 0.0117647, 1)
 
 [node name="Grass" parent="." instance=ExtResource("3_qxg0s")]
+modulate = Color(1, 6.508, 1, 1)
 material = SubResource("ShaderMaterial_vyr6i")
 pixel_size = 2
 metadata/_edit_lock_ = true

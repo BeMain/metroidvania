@@ -9,7 +9,7 @@
 resource_local_to_scene = true
 shader = ExtResource("3_71t7e")
 shader_parameter/pixel_size = 4
-shader_parameter/zoom = Vector2(7.55099, 7.55099)
+shader_parameter/zoom = Vector2(1.41421, 1.41421)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uobx"]
 radius = 40.0
